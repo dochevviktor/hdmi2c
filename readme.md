@@ -8,27 +8,39 @@ your monitors.
 This repository contains the hardware design, made with [KiCAD]. You can see the
 generated BOM and schematic [here][pages].
 
+The staged plan for a single-monitor board, XIAO ESP32-C6 migration, and ESPHome
+firmware is in [PLAN.md](PLAN.md), including progress and handoff notes for future
+sessions. The linked upstream BOM and schematic describe the original revision.
+
 ## What could you build with this
 
 - A physical brightness knob
-- Switch inputs of both monitors simultaneously when you wake up your desktop PC or
-  connect your laptop to your dock
+- Switch a monitor's input when you wake up your desktop PC or connect your laptop
+  to your dock
 - IDK probably some other weird shit
 
 ## Features
 
-- ESP32 WiFi MCU
+- ESP32-WROOM-32 WiFi MCU (XIAO ESP32-C6 migration planned)
 - USB-C power and MCU serial connection
   - With blinkenlights
-- Two HDMI ports with:
+- One HDMI port (`J7`, HDMI1) with:
   - Level shifters to bring 5v DDC signals to 3.3v for the MCU.
   - 5v HDMI presence detection, switchable from the MCU. This allows us to fake being
     unplugged and replugged from HDMI, if we need to.
 - Two forward facing buttons
+- 70 × 45 mm PCB, reduced from the original 95 × 45 mm
+
+The single-port revision removes HDMI2 and its supporting circuitry: 15 fewer
+components and approximately 26% less board area. See the
+[hardware verification notes](docs/stage1-validation.md) for checks and remaining
+findings. This revision has not yet been tested on physical hardware.
 
 ## Firmware
 
-It's floating around somewhere, I'll tidy it up and upload it at some point.
+Firmware is not included yet. [Stage 3 of the plan](PLAN.md#stage-3--esphome-firmware-over-wi-fi)
+will add ESPHome firmware for Wi-Fi control of brightness and input selection,
+targeting the XIAO ESP32-C6 carrier from stage 2.
 
 ## A word on monitor compatibility
 
