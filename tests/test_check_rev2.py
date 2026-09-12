@@ -42,6 +42,10 @@ def make_fixture(case, output):
         feet["U3"].Models()[0].m_Rotation.z = 90
     elif case == "test_wrong_xiao_model_height":
         feet["U3"].Models()[0].m_Offset.z = 0
+    elif case == "test_thin_silkscreen_graphic":
+        graphic = next(g for g in feet["R25"].GraphicalItems()
+                       if isinstance(g, k.PCB_SHAPE) and g.GetLayer() == k.F_SilkS)
+        graphic.SetWidth(k.FromMM(.12))
     elif case != "test_reviewed_design":
         raise ValueError(f"Unknown fixture: {case}")
     k.SaveBoard(output, board)
@@ -95,6 +99,9 @@ class Rev2Checks(unittest.TestCase):
 
     def test_wrong_xiao_model_height(self):
         self.check_result("XIAO 3D model m_Offset changed")
+
+    def test_thin_silkscreen_graphic(self):
+        self.check_result("Silkscreen graphic thinner than JLCPCB")
 
 
 if __name__ == "__main__":

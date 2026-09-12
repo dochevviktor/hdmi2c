@@ -78,6 +78,12 @@ verification results. A physical build is a separate validation milestone.
 - [ ] Verify the 1:1 land print against physical samples and assembled/enclosure
   clearances. Compare the 2024 model snapshot with the actual purchased module;
   cable plugs, solder, tolerances, and RF behavior remain unverified.
+- [x] Review the supplied JLCPCB template and matching BOM; apply appropriate
+  KiCad 10 factory limits, update silk, preserve the raw matching CSV, and save
+  reviewed purchasing fields with a guarded draft export.
+- [ ] Complete JLCPCB assembly preparation: resolve J7 sourcing, confirm complete
+  XIAO reflow/handling and HDMI shell-tab soldering, choose service/tooling/panel
+  needs, and verify the final CPL offsets/rotations and placement preview.
 - [ ] Bring up hardware: check USB, 3.3 V and HDMI 5 V rails, boot/programming,
   Wi-Fi reception, DDC idle levels and waveforms, and HPD/enable behavior.
 
@@ -240,3 +246,39 @@ Baseline: `59bcef6`. The user supplied the previously inaccessible GrabCAD ZIP.
 - Next physical action: compare an actual XIAO/HDMI socket with the 1:1 print and
   model, check mating plugs/enclosure support, then run the power/USB/RF/DDC
   checklist. Next software action, when requested: stage 3 against the rev2 pins.
+
+### 2026-09-12 — JLCPCB template and BOM preparation
+
+Status: **CAD profile checked; JLCPCB assembly release blocked by sourcing and
+placement/assembler approval.** Baseline `26b2222`; the user's `bom.csv` and
+unrelated `.history` changes were already present and were preserved.
+
+- Extracted the supplied template ZIP and inspected `JLCPCB_1-2Layer`. It is a
+  2019 KiCad 5 snapshot that unexpectedly enables four copper layers. Kept the
+  actual two-layer, 1.6 mm carrier and existing 0.20 mm track/clearance rules.
+  Compared relevant limits with JLCPCB's current primary documentation. Applied
+  the conservative 1 oz/green-mask profile in [JLCPCB notes](docs/jlcpcb.md).
+- Strengthened via/ring/hole, mask and silk settings; enlarged/repositioned silk
+  text and increased 33 silk graphics to 0.15 mm. No pad, route, via, footprint
+  placement, board outline, or electrical-connectivity changes.
+- Saved the six suitable user-selected MPN/LCSC groups (11 fitted parts) in the
+  schematic and PCB. **J7's C516617 / PI3HDMI1310-AZLEX match is an IC, not the
+  Würth 685119134923 connector.** It was not adopted. The existing connector is
+  retained pending the user's sourcing/replacement choice.
+- `bom.csv` stays byte-identical to the user's matching export. Regeneration now
+  writes `bom-design.csv` and `bom-jlcpcb-draft.csv`; J7 stays in the draft with
+  its correct MPN and blank LCSC code. The purchasing report remains blocked,
+  and strict checking exits nonzero. Duplicate headers, ranged references, and
+  multiline CSV fields are handled without silently choosing the wrong column.
+- Verification: 0 ERC/DRC/parity/unrouted findings; 38 matching pin groups;
+  16 regression tests pass (10 design, 6 BOM). Nominal 3D clearances unchanged;
+  refreshed prototype outputs, source hashes and solid-check report. No rule
+  severity reductions, DRC exclusions, order, upload, reservation, commit, or push.
+- Next action: resolve whether to source/consign the Würth connector, hand-fit it,
+  or investigate a JLCPCB-stocked replacement (requires footprint review before
+  adoption). Confirm XIAO reflow/handling, mixed SMT/slot soldering, service and
+  tooling with JLCPCB. Economic's published size minimum accommodates 42 × 24 mm;
+  Standard would require a panel/tooling solution. This is not an assembler approval.
+- `positions-front.csv` remains raw KiCad data: custom U3/J7 origins need CPL
+  offset/rotation verification and a placement-preview review before ordering.
+  Physical fit/RF/power/DDC tests and stage-3 firmware remain unperformed.

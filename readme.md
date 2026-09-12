@@ -40,7 +40,9 @@ support and cable strain relief.
 
 See the [hardware notes and pin mapping](docs/stage2-hardware.md) for design
 decisions, resource provenance, verification, and outstanding physical tests.
-ERC/DRC and schematic/PCB parity are clean; nine design-regression tests pass.
+ERC/DRC and schematic/PCB parity are clean; 16 design/BOM regression tests pass.
+See the [JLCPCB preparation notes](docs/jlcpcb.md) before ordering: factory-specific
+settings are applied, but J7 sourcing and final assembly placement are unresolved.
 Historical rev1 findings are recorded in [stage-1 validation](docs/stage1-validation.md).
 
 ## Firmware

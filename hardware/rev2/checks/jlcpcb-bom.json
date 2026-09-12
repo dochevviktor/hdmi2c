@@ -1,0 +1,125 @@
+{
+  "status": "BLOCKED \u2014 not an assembly release",
+  "ready_for_order": false,
+  "matching_csv_sha256": "805235e6569a30b30a49cb391ac79200c11d6300927d9ce32ccc3585df5c9b1c",
+  "netlist_sha256": "8e154476fabb31637fada7d8a004cd95d6283c5fede825d5c4a3a1cfa8f4b306",
+  "unresolved_references": [
+    "J7"
+  ],
+  "parts": [
+    {
+      "reference": "C1",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "CC0603KRX7R9BB104",
+      "selected_code": "C14663",
+      "schematic_mpn": "CC0603KRX7R9BB104",
+      "approved_code": "C14663",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "C2",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "CC0603KRX7R9BB104",
+      "selected_code": "C14663",
+      "schematic_mpn": "CC0603KRX7R9BB104",
+      "approved_code": "C14663",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "C3",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "CC0603KRX7R9BB104",
+      "selected_code": "C14663",
+      "schematic_mpn": "CC0603KRX7R9BB104",
+      "approved_code": "C14663",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "J7",
+      "status": "REJECTED",
+      "selected_mpn": "PI3HDMI1310-AZLEX",
+      "selected_code": "C516617",
+      "schematic_mpn": "685119134923",
+      "approved_code": "",
+      "note": "J7 requires Wurth 685119134923. C516617 / PI3HDMI1310-AZLEX is a TQFN HDMI switch IC, not a connector. No replacement code is approved."
+    },
+    {
+      "reference": "R24",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "FRH0603B1003TS",
+      "selected_code": "C51048211",
+      "schematic_mpn": "FRH0603B1003TS",
+      "approved_code": "C51048211",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "R25",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "FRH0603B1003TS",
+      "selected_code": "C51048211",
+      "schematic_mpn": "FRH0603B1003TS",
+      "approved_code": "C51048211",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "R26",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "SC0603F1002F2BNRH",
+      "selected_code": "C3152123",
+      "schematic_mpn": "SC0603F1002F2BNRH",
+      "approved_code": "C3152123",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "R27",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "SC0603F1002F2BNRH",
+      "selected_code": "C3152123",
+      "schematic_mpn": "SC0603F1002F2BNRH",
+      "approved_code": "C3152123",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "SW2",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "B3U-1000P",
+      "selected_code": "C231329",
+      "schematic_mpn": "B3U-1000P",
+      "approved_code": "C231329",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "SW3",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "B3U-1000P",
+      "selected_code": "C231329",
+      "schematic_mpn": "B3U-1000P",
+      "approved_code": "C231329",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "U3",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "113991254",
+      "selected_code": "C27675191",
+      "schematic_mpn": "113991254",
+      "approved_code": "C27675191",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    },
+    {
+      "reference": "U4",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "TPD12S016PWR",
+      "selected_code": "C201665",
+      "schematic_mpn": "TPD12S016PWR",
+      "approved_code": "C201665",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
+    }
+  ],
+  "remaining": [
+    "Resolve J7 sourcing without an unreviewed footprint substitution.",
+    "Confirm XIAO module reflow/handling and HDMI shell-tab soldering with JLCPCB.",
+    "Confirm assembly service, tooling/panel needs and corrected CPL origins/rotations.",
+    "Recheck availability, quote and physical validation; no order has been placed."
+  ]
+}

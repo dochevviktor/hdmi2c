@@ -172,6 +172,14 @@ def main():
         require([mm_pair(polygon.CPoint(i)) for i in range(polygon.PointCount())] == points,
                 f"Changed keepout geometry: {name}")
     print(f"PASS: Two-layer 42 x 24 mm outline ({outline.Area() / 1e12:.2f} mm² material area), safety keepouts")
+    # KiCad's text-thickness DRC does not cover thin footprint outline graphics.
+    graphics = list(board.GetDrawings())
+    for foot in feet.values():
+        graphics.extend(foot.GraphicalItems())
+    for item in graphics:
+        if isinstance(item, k.PCB_SHAPE) and item.GetLayer() in (k.F_SilkS, k.B_SilkS):
+            require(item.GetWidth() >= k.FromMM(.15), "Silkscreen graphic thinner than JLCPCB 0.15 mm profile")
+    print("PASS: Silkscreen graphic strokes meet the 0.15 mm JLCPCB profile")
     print("Physical fit, RF, power, and monitor behavior remain untested.")
     return 0
 

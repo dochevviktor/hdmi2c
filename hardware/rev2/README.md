@@ -3,11 +3,17 @@
 **CAD-checked; not built or electrically tested. Do not treat this as a qualified
 production release.** Read the [hardware notes](../../docs/stage2-hardware.md)
 before fabrication or assembly. No order or external publication was performed.
+JLCPCB preparation is documented in [JLCPCB notes](../../docs/jlcpcb.md).
+**J7's auto-match is incorrect; sourcing and assembly placement remain blocked.**
 
 - [Schematic PDF](schematic.pdf)
-- [BOM](bom.csv): 12 fitted components, including the purchased XIAO module.
-  Generic passives must meet the stated voltage, dielectric, power, and tolerance
-  specifications. Source availability and assembler substitutions need review.
+- [Engineering BOM](bom-design.csv): 12 fitted components, including the XIAO,
+  with reviewed specifications and purchasing fields.
+- [Original JLCPCB matching CSV](bom.csv): user-managed and preserved, including
+  its incorrect J7 auto-match; **do not order from this unreviewed mapping**.
+- [JLCPCB draft BOM](bom-jlcpcb-draft.csv) and [BOM audit](checks/jlcpcb-bom.json):
+  six matched part groups / 11 components; J7 remains the Würth socket with no
+  approved JLCPCB code. Still a draft, not an assembly release.
 - [Front assembly](assembly-front.svg) and [back assembly](assembly-back.svg):
   enlarged 4:1 drawings; the back view is mirrored. All fitted parts are front-side;
   the four back test pads are not fitted components.
@@ -21,7 +27,8 @@ before fabrication or assembly. No order or external publication was performed.
   [model provenance/redistribution caveat](../../3d/README.md) before reuse.
 - [Placement data](positions-front.csv): mm, absolute KiCad origin, standard
   KiCad rotations. **U3's footprint origin is not its body centroid**; the assembler
-  must check its machine origin and rotation. J7 is mixed SMT/plated-slot assembly
+  must check its machine origin and rotation. This is not a finalized JLCPCB CPL;
+  U3 and J7 require offset/rotation review. J7 is mixed SMT/plated-slot assembly
   and is included in this file, not omitted as a non-SMD part.
 - [Fabrication files](fabrication/): two copper layers, both solder masks and
   silkscreens, paste, outline, plated/non-plated Excellon drills, and drill maps.
@@ -32,9 +39,10 @@ before fabrication or assembly. No order or external publication was performed.
   [nominal 3D clearance report](checks/mechanical-3d.json). The latter records
   source and STEP hashes; it is not evidence of a physical fit or RF test.
 
-Fabrication assumptions: 2 layers, 1.6 mm FR-4, nominal 35 µm (1 oz) copper;
+Fabrication assumptions: 2 layers, 1.6 mm FR-4, nominal 35 µm (1 oz) copper, green mask;
 0.20 mm minimum tracks/clearance, 0.60/0.30 mm vias, 0.30 mm copper-to-edge
-clearance. Confirm these, mask web capability, routed plated slots, and stencil
+clearance, 0.12 mm mask web, and 1.0/0.15 mm minimum silk text height/stroke.
+Confirm these, mask web capability, routed plated slots, and stencil
 handling of the XIAO with the fabricator. The 42 × 24 mm measurement excludes
 connector overhangs. There are no mounting holes; provide enclosure support.
 
@@ -47,7 +55,9 @@ sha256sum -c hardware/rev2/checks/source-sha256.txt
 ```
 
 The export script runs ERC, DRC/parity, the electrical/mechanical/model contract
-check, and nine regression tests before exporting production-format files. If it
+check, and 16 regression tests before exporting production-format files. It never
+overwrites `bom.csv`. The purchasing audit permits the known J7 blocker only to
+produce a clearly named draft. If the export
 fails, do not use earlier output files as a release for the newly edited design.
 The existing upstream Pages workflow was not upgraded or tested; these checked-in
 files and the local script are the rev2 handoff.

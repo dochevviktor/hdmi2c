@@ -21,9 +21,13 @@ python3 scripts/check_rev2.py hdmi2c.kicad_pcb "$artifact_dir/checks/netlist.xml
 python3 -m unittest discover -s tests -v
 
 kicad-cli sch export pdf --output "$artifact_dir/schematic.pdf" hdmi2c.kicad_sch
-kicad-cli sch export bom --fields Reference,Value,Footprint,QUANTITY,Manufacturer,MPN,Specification,Datasheet \
-  --labels References,Value,Footprint,Quantity,Manufacturer,MPN,Specification,Datasheet \
-  --group-by Value,Footprint,MPN,Specification --output "$artifact_dir/bom.csv" hdmi2c.kicad_sch
+kicad-cli sch export bom --fields 'Reference,Value,Footprint,QUANTITY,Manufacturer,MPN,LCSC Part #,Specification,Datasheet' \
+  --labels 'References,Value,Footprint,Quantity,Manufacturer,MPN,LCSC Part #,Specification,Datasheet' \
+  --group-by Value,Footprint,MPN,Specification --output "$artifact_dir/bom-design.csv" hdmi2c.kicad_sch
+# bom.csv is the user's JLCPCB matching export; never overwrite it with CAD output.
+python3 scripts/check_jlcpcb_bom.py "$artifact_dir/bom.csv" "$artifact_dir/checks/netlist.xml" \
+  --report "$artifact_dir/checks/jlcpcb-bom.json" --allow-unresolved-j7 \
+  --draft-bom "$artifact_dir/bom-jlcpcb-draft.csv"
 kicad-cli pcb export pos --side front --format csv --units mm \
   --output "$artifact_dir/positions-front.csv" hdmi2c.kicad_pcb
 
@@ -59,6 +63,7 @@ sha256sum hdmi2c.kicad_sch hdmi2c.kicad_pcb hdmi2c.kicad_pro hdmi2c.kicad_sym \
   hdmi2c.pretty/XIAO_ESP32C6_Castellated.kicad_mod \
   hdmi2c.pretty/WURTH_685119134923_HDMI.kicad_mod \
   3d/Seeed_Studio_XIAO_ESP32C6.step 3d/WURTH_685119134923_HDMI.STEP \
+  hardware/rev2/bom.csv \
   > "$artifact_dir/checks/source-sha256.txt"
 echo 'Solid-clearance review is separate: see hardware/rev2/README.md to refresh its hashed report.'
 echo "Prototype package updated: $artifact_dir (physical validation still required)."

@@ -3,6 +3,8 @@
 Design date: 2026-09-12. This is a prototype design, not tested hardware.
 See [PLAN.md](../PLAN.md) for project status and the remaining bring-up work.
 The ESPHome implementation is still stage 3; no working firmware is implied.
+For the current factory settings, selected purchasing codes, and unresolved
+connector/assembly decisions, see [JLCPCB preparation](jlcpcb.md).
 
 ## What changed
 
@@ -140,7 +142,9 @@ Reviewed on 2026-09-12 using KiCad 10.0.6 STEP exports/renders and OpenCascade
 (`cadquery-ocp 8.0.1.0.0`). All 12 fitted components have models; test pads do not
 need separate models. The XIAO STEP is a **2024 mechanical snapshot**, not proof
 of the exact purchased module revision. See [model provenance and transform](../3d/README.md).
-Neither the electrical design, routing, land geometry, outline, nor BOM changed.
+The 3D integration itself changed neither electrical design, routing, lands,
+outline, nor BOM. The subsequent JLCPCB follow-up updates purchasing metadata
+and silkscreen, as documented separately.
 
 | Nominal CAD check | Result |
 | --- | --- |
@@ -222,7 +226,8 @@ Checked with **KiCad CLI / pcbnew 10.0.6** on 2026-09-12. The schematic was redr
 in format 20250114; the new PCB uses format 20260206. Use KiCad 10 for this revision.
 This intentionally supersedes stage 1's legacy-format preservation. Existing
 unrelated project preferences were preserved; minimum clearance, copper-to-edge,
-and silkscreen spacing are now 0.20, 0.30, and 0.10 mm respectively. There are no
+and silkscreen spacing are now 0.20, 0.30, and 0.15 mm respectively after the
+JLCPCB profile update. There are no
 DRC exclusions. Stage 1's 7 ERC and 10 DRC errors no longer apply to this redesign.
 Results use the project's configured severities. Six inherited checks remain
 ignored (missing courtyard, track endpoint centered on via, tuning-profile
@@ -238,7 +243,7 @@ lists them explicitly. No rules were disabled to obtain the rev2 result.
 | Independent electrical-contract / netlist comparison | 38 matching pin groups, including 24 intentional NC groups |
 | XIAO footprint comparison to downloaded Seeed library | All 14 side-pad positions, sizes, and numbers match |
 | PCB outline | 42 × 24 mm; approximately 915.64 mm² material area |
-| Regression tests | 9 pass: valid design and eight deliberate fault cases |
+| Regression tests | 16 pass: 10 design checks and 6 BOM parser/identity checks |
 | XIAO model contract | Pinned STEP hash and identical reviewed transforms in library and PCB |
 | Nominal 3D checks | XIAO/carrier/component clearances, antenna projection, HDMI shell/slot clearance; details above |
 | Visual review | Schematic, front/back assembly and copper, plated-slot drill output, detailed front/back 3D views |
@@ -257,6 +262,8 @@ the solid-check report. Its source/STEP hashes identify the assembly actually ch
 `python3 -m unittest discover -s tests -v` exercises swapped SDA/SCL, a direct
 5 V-to-GPIO miswire, changed land geometry, missing/weakened antenna keepouts,
 and missing/rotated/vertically misplaced XIAO models.
+The JLCPCB follow-up also checks minimum silk graphic width and protects against
+ambiguous matching columns, missing parts, and the wrong HDMI IC auto-match.
 These are design-regression checks, not circuit simulation or evidence that DDC
 works on a monitor.
 

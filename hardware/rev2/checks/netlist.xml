@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/agentic/IdeaProjects/hdmi2c/hdmi2c.kicad_sch</source>
-    <date>2026-09-12T20:32:58</date>
+    <date>2026-09-12T21:49:34</date>
     <tool>Eeschema 10.0.6-1.fc44</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -28,16 +28,18 @@
       <value>100nF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">YAGEO</field>
+        <field name="MPN">CC0603KRX7R9BB104</field>
+        <field name="LCSC Part #">C14663</field>
         <field name="Specification">100 nF; &gt;=16 V; X7R; +/-10%; 0603</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="YAGEO"/>
+      <property name="MPN" value="CC0603KRX7R9BB104"/>
+      <property name="LCSC Part #" value="C14663"/>
       <property name="Specification" value="100 nF; &gt;=16 V; X7R; +/-10%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -58,16 +60,18 @@
       <value>100nF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">YAGEO</field>
+        <field name="MPN">CC0603KRX7R9BB104</field>
+        <field name="LCSC Part #">C14663</field>
         <field name="Specification">100 nF; &gt;=16 V; X7R; +/-10%; 0603</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="YAGEO"/>
+      <property name="MPN" value="CC0603KRX7R9BB104"/>
+      <property name="LCSC Part #" value="C14663"/>
       <property name="Specification" value="100 nF; &gt;=16 V; X7R; +/-10%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -88,16 +92,18 @@
       <value>100nF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">YAGEO</field>
+        <field name="MPN">CC0603KRX7R9BB104</field>
+        <field name="LCSC Part #">C14663</field>
         <field name="Specification">100 nF; &gt;=16 V; X7R; +/-10%; 0603</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="YAGEO"/>
+      <property name="MPN" value="CC0603KRX7R9BB104"/>
+      <property name="LCSC Part #" value="C14663"/>
       <property name="Specification" value="100 nF; &gt;=16 V; X7R; +/-10%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -167,16 +173,18 @@
       <value>100k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">FOJAN</field>
+        <field name="MPN">FRH0603B1003TS</field>
+        <field name="LCSC Part #">C51048211</field>
         <field name="Specification">100 kohm; &gt;=0.1 W; +/-1%; 0603</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="FOJAN"/>
+      <property name="MPN" value="FRH0603B1003TS"/>
+      <property name="LCSC Part #" value="C51048211"/>
       <property name="Specification" value="100 kohm; &gt;=0.1 W; +/-1%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -197,16 +205,18 @@
       <value>100k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">FOJAN</field>
+        <field name="MPN">FRH0603B1003TS</field>
+        <field name="LCSC Part #">C51048211</field>
         <field name="Specification">100 kohm; &gt;=0.1 W; +/-1%; 0603</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="FOJAN"/>
+      <property name="MPN" value="FRH0603B1003TS"/>
+      <property name="LCSC Part #" value="C51048211"/>
       <property name="Specification" value="100 kohm; &gt;=0.1 W; +/-1%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -227,16 +237,18 @@
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">Sunway</field>
+        <field name="MPN">SC0603F1002F2BNRH</field>
+        <field name="LCSC Part #">C3152123</field>
         <field name="Specification">10 kohm; &gt;=0.1 W; +/-1%; 0603</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="Sunway"/>
+      <property name="MPN" value="SC0603F1002F2BNRH"/>
+      <property name="LCSC Part #" value="C3152123"/>
       <property name="Specification" value="10 kohm; &gt;=0.1 W; +/-1%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -257,16 +269,18 @@
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Manufacturer">Generic</field>
-        <field name="MPN">Select to specification</field>
+        <field name="Manufacturer">Sunway</field>
+        <field name="MPN">SC0603F1002F2BNRH</field>
+        <field name="LCSC Part #">C3152123</field>
         <field name="Specification">10 kohm; &gt;=0.1 W; +/-1%; 0603</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
-      <property name="Manufacturer" value="Generic"/>
-      <property name="MPN" value="Select to specification"/>
+      <property name="Manufacturer" value="Sunway"/>
+      <property name="MPN" value="SC0603F1002F2BNRH"/>
+      <property name="LCSC Part #" value="C3152123"/>
       <property name="Specification" value="10 kohm; &gt;=0.1 W; +/-1%; 0603"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -290,6 +304,7 @@
       <fields>
         <field name="Manufacturer">Omron</field>
         <field name="MPN">B3U-1000P</field>
+        <field name="LCSC Part #">C231329</field>
         <field name="Specification">Top-actuated SPST-NO; no locating boss</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet">https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf</field>
@@ -298,6 +313,7 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Manufacturer" value="Omron"/>
       <property name="MPN" value="B3U-1000P"/>
+      <property name="LCSC Part #" value="C231329"/>
       <property name="Specification" value="Top-actuated SPST-NO; no locating boss"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -320,6 +336,7 @@
       <fields>
         <field name="Manufacturer">Omron</field>
         <field name="MPN">B3U-1000P</field>
+        <field name="LCSC Part #">C231329</field>
         <field name="Specification">Top-actuated SPST-NO; no locating boss</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet">https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf</field>
@@ -328,6 +345,7 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Manufacturer" value="Omron"/>
       <property name="MPN" value="B3U-1000P"/>
+      <property name="LCSC Part #" value="C231329"/>
       <property name="Specification" value="Top-actuated SPST-NO; no locating boss"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -445,7 +463,8 @@
       <datasheet>https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/XIAO_ESP32_C6_v1.0_SCH_260114.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Seeed Studio</field>
-        <field name="MPN">XIAO ESP32-C6</field>
+        <field name="MPN">113991254</field>
+        <field name="LCSC Part #">C27675191</field>
         <field name="Specification">Complete V1.0 module; 14 soldered castellations; 4 MB flash</field>
         <field name="Footprint">hdmi2c:XIAO_ESP32C6_Castellated</field>
         <field name="Datasheet">https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/XIAO_ESP32_C6_v1.0_SCH_260114.pdf</field>
@@ -453,7 +472,8 @@
       </fields>
       <libsource lib="hdmi2c" part="XIAO_ESP32C6" description="Seeed Studio XIAO ESP32-C6 V1.0; 14 castellated pins; USB powered"/>
       <property name="Manufacturer" value="Seeed Studio"/>
-      <property name="MPN" value="XIAO ESP32-C6"/>
+      <property name="MPN" value="113991254"/>
+      <property name="LCSC Part #" value="C27675191"/>
       <property name="Specification" value="Complete V1.0 module; 14 soldered castellations; 4 MB flash"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>
@@ -487,6 +507,7 @@
       <fields>
         <field name="Manufacturer">Texas Instruments</field>
         <field name="MPN">TPD12S016PWR</field>
+        <field name="LCSC Part #">C201665</field>
         <field name="Specification">PW/TSSOP-24; do not substitute the RKT pinout</field>
         <field name="Footprint">Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm</field>
         <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tpd12s016.pdf</field>
@@ -495,6 +516,7 @@
       <libsource lib="hdmi2c" part="TPD12S016PW" description="TI HDMI interface, TSSOP-24 PW; DDC level shifting and protected 5 V output"/>
       <property name="Manufacturer" value="Texas Instruments"/>
       <property name="MPN" value="TPD12S016PWR"/>
+      <property name="LCSC Part #" value="C201665"/>
       <property name="Specification" value="PW/TSSOP-24; do not substitute the RKT pinout"/>
       <property name="Sheetname" value="hdmi2c"/>
       <property name="Sheetfile" value="hdmi2c.kicad_sch"/>

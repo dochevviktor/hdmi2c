@@ -41,6 +41,7 @@
 	)
 	(setup
 		(pad_to_mask_clearance 0)
+		(solder_mask_min_width 0.12)
 		(allow_soldermask_bridges_in_footprints no)
 		(tenting
 			(front yes)
@@ -100,13 +101,13 @@
 		(descr "Ultra-small-sized Tactile Switch with High Contact Reliability, Top-actuated Model, without Ground Terminal, without Boss")
 		(tags "Tactile Switch")
 		(property "Reference" "SW2"
-			(at 0 0 0)
+			(at -3.9 -1.1 0)
 			(layer "F.SilkS")
 			(uuid "fddb2ab6-10b9-443f-88b9-ab8105844ce3")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -172,6 +173,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C231329"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9eb83553-239e-49a1-880d-46f394eadf50")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "Top-actuated SPST-NO; no locating boss"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -192,7 +199,7 @@
 			(start -1.65 -1.4)
 			(end 1.65 -1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -202,7 +209,7 @@
 			(start -1.65 -1.1)
 			(end -1.65 -1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -212,7 +219,7 @@
 			(start -1.65 1.1)
 			(end -1.65 1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -222,7 +229,7 @@
 			(start -1.65 1.4)
 			(end 1.65 1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -232,7 +239,7 @@
 			(start 1.65 -1.4)
 			(end 1.65 -1.1)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -242,7 +249,7 @@
 			(start 1.65 1.4)
 			(end 1.65 1.1)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -445,7 +452,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "Sunway"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -457,7 +464,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "SC0603F1002F2BNRH"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -469,6 +476,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C3152123"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7b39f9d7-be73-4964-8886-dad6c24cf335")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "10 kohm; >=0.1 W; +/-1%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -489,7 +502,7 @@
 			(start -0.237258 -0.5225)
 			(end 0.237258 -0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -499,7 +512,7 @@
 			(start -0.237258 0.5225)
 			(end 0.237258 0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -633,7 +646,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "FOJAN"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -645,7 +658,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "FRH0603B1003TS"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -657,6 +670,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C51048211"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "56223a5e-af27-410d-bd0e-9c11e174e1da")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "100 kohm; >=0.1 W; +/-1%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -677,7 +696,7 @@
 			(start -0.237258 -0.5225)
 			(end 0.237258 -0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -687,7 +706,7 @@
 			(start -0.237258 0.5225)
 			(end 0.237258 0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -764,13 +783,13 @@
 		(descr "Ultra-small-sized Tactile Switch with High Contact Reliability, Top-actuated Model, without Ground Terminal, without Boss")
 		(tags "Tactile Switch")
 		(property "Reference" "SW3"
-			(at 0 0 0)
+			(at 4.6 -0.5 0)
 			(layer "F.SilkS")
 			(uuid "7376830d-af32-4e82-b182-81d8c80b74c6")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -836,6 +855,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C231329"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a0925039-c334-4b31-8026-727682d7fa0a")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "Top-actuated SPST-NO; no locating boss"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -856,7 +881,7 @@
 			(start -1.65 -1.4)
 			(end 1.65 -1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -866,7 +891,7 @@
 			(start -1.65 -1.1)
 			(end -1.65 -1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -876,7 +901,7 @@
 			(start -1.65 1.1)
 			(end -1.65 1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -886,7 +911,7 @@
 			(start -1.65 1.4)
 			(end 1.65 1.4)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -896,7 +921,7 @@
 			(start 1.65 -1.4)
 			(end 1.65 -1.1)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -906,7 +931,7 @@
 			(start 1.65 1.4)
 			(end 1.65 1.1)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -1109,7 +1134,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "FOJAN"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1121,7 +1146,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "FRH0603B1003TS"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1133,6 +1158,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C51048211"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5f20e500-eebd-4cce-b62f-742dcf35fc17")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "100 kohm; >=0.1 W; +/-1%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -1153,7 +1184,7 @@
 			(start -0.237258 -0.5225)
 			(end 0.237258 -0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -1163,7 +1194,7 @@
 			(start -0.237258 0.5225)
 			(end 0.237258 0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -1602,13 +1633,13 @@
 		(descr "TSSOP, 24 Pin (JEDEC MO-153 variation AD, 1.00mm body thickness, https://www.jedec.org/document_search?search_api_views_fulltext=MO-153)")
 		(tags "TSSOP SO")
 		(property "Reference" "U4"
-			(at 0 -4.75 0)
+			(at -4.6 0 0)
 			(layer "F.SilkS")
 			(uuid "f5fcfb92-f420-4ec9-be20-6b96fa6b7382")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1682,6 +1713,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C201665"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "251592e5-ac0c-490d-a3d7-0d34b3203c51")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "PW/TSSOP-24; do not substitute the RKT pinout"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -1702,7 +1739,7 @@
 			(start -2.31 -4.035)
 			(end 2.31 -4.035)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -1712,7 +1749,7 @@
 			(start 2.31 4.035)
 			(end -2.31 4.035)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -1723,7 +1760,7 @@
 				(xy -3.86 -3.58) (xy -4.19 -3.34) (xy -4.19 -3.82)
 			)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(fill yes)
@@ -2190,7 +2227,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "Sunway"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2202,7 +2239,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "SC0603F1002F2BNRH"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2214,6 +2251,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C3152123"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8c286627-f33f-4550-9ba7-0f6f327031d5")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "10 kohm; >=0.1 W; +/-1%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -2234,7 +2277,7 @@
 			(start -0.237258 -0.5225)
 			(end 0.237258 -0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -2244,7 +2287,7 @@
 			(start -0.237258 0.5225)
 			(end 0.237258 0.5225)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -2380,7 +2423,7 @@
 				)
 			)
 		)
-		(property "MPN" "XIAO ESP32-C6"
+		(property "MPN" "113991254"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2392,6 +2435,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C27675191"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "af007598-1f0c-42a0-9560-4aa0109830d2")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "Complete V1.0 module; 14 soldered castellations; 4 MB flash"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -2792,8 +2841,8 @@
 			(uuid "c3c1fb30-c3ad-4003-a8ce-ac14d9c87224")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2843,7 +2892,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "YAGEO"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2855,7 +2904,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2867,6 +2916,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "84f8e0ed-f9f6-4752-bf14-99f2bd774b5c")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "100 nF; >=16 V; X7R; +/-10%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -2887,7 +2942,7 @@
 			(start -0.14058 -0.51)
 			(end 0.14058 -0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -2897,7 +2952,7 @@
 			(start -0.14058 0.51)
 			(end 0.14058 0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -3031,7 +3086,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "YAGEO"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3043,7 +3098,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3055,6 +3110,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1c3cddca-2fe0-437f-8104-3e2bd624b208")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "100 nF; >=16 V; X7R; +/-10%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -3075,7 +3136,7 @@
 			(start -0.14058 -0.51)
 			(end 0.14058 -0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -3085,7 +3146,7 @@
 			(start -0.14058 0.51)
 			(end 0.14058 0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -3167,8 +3228,8 @@
 			(uuid "39a097de-a207-4f59-bc63-99447cb7ab36")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3206,7 +3267,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Generic"
+		(property "Manufacturer" "YAGEO"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3218,7 +3279,7 @@
 				)
 			)
 		)
-		(property "MPN" "Select to specification"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3230,6 +3291,12 @@
 				)
 			)
 		)
+		(property "LCSC Part #" "C14663"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "69911497-4c6b-45a7-aec8-2b3185213efb")
+			(effects (font (size 1.27 1.27) (thickness 0.15))))
 		(property "Specification" "100 nF; >=16 V; X7R; +/-10%; 0603"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -3262,7 +3329,7 @@
 			(start -0.14058 -0.51)
 			(end 0.14058 -0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -3272,7 +3339,7 @@
 			(start -0.14058 0.51)
 			(end 0.14058 0.51)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
@@ -3349,13 +3416,13 @@
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP3"
-			(at 0 -1.3 0)
+			(at 0 -1.75 0)
 			(layer "B.SilkS")
 			(uuid "6a381575-13f7-469a-9550-d496e9ece473")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -3409,7 +3476,7 @@
 			(center 0 0)
 			(end 0 -0.7)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(fill no)
@@ -3457,13 +3524,13 @@
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP4"
-			(at 0 -1.3 0)
+			(at 0 -1.75 0)
 			(layer "B.SilkS")
 			(uuid "cbc4a793-2c96-4a96-8433-fff3a2de41b1")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -3517,7 +3584,7 @@
 			(center 0 0)
 			(end 0 -0.7)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(fill no)
@@ -3565,13 +3632,13 @@
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP1"
-			(at 0 -1.3 0)
+			(at 0 -1.75 0)
 			(layer "B.SilkS")
 			(uuid "da68509c-3ec3-43c5-8697-1d78c6adf544")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -3625,7 +3692,7 @@
 			(center 0 0)
 			(end 0 -0.7)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(fill no)
@@ -3673,13 +3740,13 @@
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP2"
-			(at 0 -1.3 0)
+			(at 0 -1.75 0)
 			(layer "B.SilkS")
 			(uuid "e48448b2-6870-42b2-b1ed-08e46a66c924")
 			(effects
 				(font
-					(size 0.8 0.8)
-					(thickness 0.12)
+					(size 1 1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -3733,7 +3800,7 @@
 			(center 0 0)
 			(end 0 -0.7)
 			(stroke
-				(width 0.12)
+				(width 0.15)
 				(type solid)
 			)
 			(fill no)
@@ -3949,7 +4016,7 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.13)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -3959,8 +4026,8 @@
 		(uuid "90ac6652-bb39-416d-b9cf-9dd37aa892a0")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -3971,8 +4038,8 @@
 		(uuid "0a1db8f6-f973-4a4e-9951-2e00e2d375af")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -3983,8 +4050,8 @@
 		(uuid "67000e70-3381-442e-94ea-ae23a159d4e0")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -3995,8 +4062,8 @@
 		(uuid "41a95967-cb9c-4c1d-a666-e945b836bc28")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -4007,8 +4074,8 @@
 		(uuid "1c2d4468-41d1-4419-9621-9144cc90107b")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -4019,8 +4086,8 @@
 		(uuid "8dfe2f88-a8ed-4c84-8135-1997fa7ecba8")
 		(effects
 			(font
-				(size 0.9 0.9)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -4031,8 +4098,8 @@
 		(uuid "f5f64db9-1bda-446a-a347-af6d560774a5")
 		(effects
 			(font
-				(size 0.9 0.9)
-				(thickness 0.13)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
@@ -4044,7 +4111,7 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.13)
+				(thickness 0.15)
 			)
 			(justify mirror)
 		)
