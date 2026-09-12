@@ -1,0 +1,127 @@
+{
+  "status": "PASS (nominal CAD only)",
+  "tool": "cadquery-ocp 8.0.1.0.0",
+  "source_manifest_sha256": "8ffbbcf238457e6f7d57c41fda2858aa02df7fcce1dd1980c55d26735f13f9b1",
+  "step_sha256": "55e352bac9e83a5dabb7f9786cbf00ff00d9cb94f0b15fb195f0791b2943c4d8",
+  "pcb_sha256": "916276b5e96a1828fb2b3ec40fd3e6fd5ada9be0a9cdf514b9166066f2623c42",
+  "xiao_model_sha256": "2e1ce01f4497192485823ca9fffd68e323bafc84cd7b85c2906b5497550be8fc",
+  "coordinates": "mm; X=PCB X, Y=-PCB Y, Z=KiCad STEP height; bounds=minXYZ,maxXYZ",
+  "modeled_fitted_components": [
+    "C1",
+    "C2",
+    "C3",
+    "J7",
+    "R24",
+    "R25",
+    "R26",
+    "R27",
+    "SW2",
+    "SW3",
+    "U3",
+    "U4"
+  ],
+  "assembly_bounds": [
+    50.0,
+    -74.0,
+    -0.61,
+    93.9,
+    -48.488,
+    7.77
+  ],
+  "assembly_size_mm": [
+    43.9,
+    25.512,
+    8.38
+  ],
+  "xiao_board_bounds": [
+    52.0,
+    -70.951,
+    1.595,
+    69.78,
+    -49.996,
+    2.845
+  ],
+  "xiao_usb_bounds": [
+    56.42,
+    -56.388,
+    1.855,
+    65.36,
+    -48.488,
+    6.055
+  ],
+  "xiao_antenna_bounds": [
+    61.505809,
+    -70.808377,
+    2.845,
+    66.705809,
+    -68.808377,
+    3.445
+  ],
+  "xiao_to_components": {
+    "C1": {
+      "minimum_distance_mm": 2.42,
+      "intersection_volume_mm3": 0.0
+    },
+    "C2": {
+      "minimum_distance_mm": 9.02,
+      "intersection_volume_mm3": 0.0
+    },
+    "C3": {
+      "minimum_distance_mm": 8.02,
+      "intersection_volume_mm3": 0.0
+    },
+    "J7": {
+      "minimum_distance_mm": 11.97,
+      "intersection_volume_mm3": 0.0
+    },
+    "R24": {
+      "minimum_distance_mm": 1.82,
+      "intersection_volume_mm3": 0.0
+    },
+    "R25": {
+      "minimum_distance_mm": 4.92,
+      "intersection_volume_mm3": 0.0
+    },
+    "R26": {
+      "minimum_distance_mm": 4.42,
+      "intersection_volume_mm3": 0.0
+    },
+    "R27": {
+      "minimum_distance_mm": 9.02,
+      "intersection_volume_mm3": 0.0
+    },
+    "SW2": {
+      "minimum_distance_mm": 3.22,
+      "intersection_volume_mm3": 0.0
+    },
+    "SW3": {
+      "minimum_distance_mm": 11.22,
+      "intersection_volume_mm3": 0.0
+    },
+    "U4": {
+      "minimum_distance_mm": 2.82,
+      "intersection_volume_mm3": 0.0
+    }
+  },
+  "closest_component_to_xiao": "R24",
+  "xiao_to_carrier_substrate": {
+    "minimum_distance_mm": 0.085,
+    "intersection_volume_mm3": 0.0
+  },
+  "hdmi_to_carrier_substrate": {
+    "minimum_distance_mm": 0.08,
+    "intersection_volume_mm3": 0.0
+  },
+  "antenna_projection_to_carrier": {
+    "minimum_distance_mm": 0.294191,
+    "intersection_volume_mm3": 0.0
+  },
+  "limitations": [
+    "Older 2024 XIAO model; actual purchased module revision must be checked.",
+    "No solder, cables/plugs, enclosure, manufacturing tolerances, or load analysis.",
+    "Substrate separation excludes copper/mask; it is not a specified solder standoff.",
+    "Antenna clearance is geometric only, not an RF keepout recommendation or RF test.",
+    "Checks only the listed external pairs, not internal XIAO component intersections.",
+    "STEP/source hashes must match the reviewed files; rerun after re-exporting."
+  ]
+}

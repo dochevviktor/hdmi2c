@@ -8,7 +8,8 @@ your monitors.
 This repository contains the hardware design, made with [KiCAD]. The current
 **rev2 XIAO ESP32-C6 carrier is CAD-checked but not physically tested**. Its
 [prototype package](hardware/rev2/README.md) includes the BOM, schematic, assembly
-drawings, Gerbers, and drills. Open the current project with KiCad 10.
+drawings, a detailed [3D assembly view](hardware/rev2/assembly-3d-front.png), STEP,
+Gerbers, and drills. Open the current project with KiCad 10.
 
 The staged plan for a single-monitor board, XIAO ESP32-C6 migration, and ESPHome
 firmware is in [PLAN.md](PLAN.md), including progress and handoff notes for future
@@ -39,7 +40,7 @@ support and cable strain relief.
 
 See the [hardware notes and pin mapping](docs/stage2-hardware.md) for design
 decisions, resource provenance, verification, and outstanding physical tests.
-ERC/DRC and schematic/PCB parity are clean; six design-regression tests pass.
+ERC/DRC and schematic/PCB parity are clean; nine design-regression tests pass.
 Historical rev1 findings are recorded in [stage-1 validation](docs/stage1-validation.md).
 
 ## Firmware

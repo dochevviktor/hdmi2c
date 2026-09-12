@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.6-1.fc44*%
-%TF.CreationDate,2026-09-12T15:31:02+02:00*%
+%TF.CreationDate,2026-09-12T20:33:14+02:00*%
 %TF.ProjectId,hdmi2c,68646d69-3263-42e6-9b69-6361645f7063,rev2*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.6-1.fc44) date 2026-09-12 15:31:02*
+G04 Created by KiCad (PCBNEW 10.0.6-1.fc44) date 2026-09-12 20:33:14*
 %MOMM*%
 %LPD*%
 G01*

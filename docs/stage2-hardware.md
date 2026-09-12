@@ -130,10 +130,44 @@ power-up and solder inspection.
   strain relief; do not treat the castellated joints as cable-load supports.
 - All fitted parts are on the front. TP1–TP4 are **back-side** exposed pads:
   HDMI 5 V, GND, SCL, SDA. Back assembly plots are mirrored for a bottom view.
-- Seeed's linked GrabCAD model returned HTTP 403 during this session. No detailed
-  XIAO STEP model is included or claimed as checked. Module positioning uses the
-  official 2D CAD; exact assembled height and enclosure fit still need a model or
-  physical sample. Do not infer complete assembly clearance from a partial 3D view.
+- The user supplied Seeed's linked GrabCAD STEP snapshot after the original
+  download returned HTTP 403. It is now linked in both the local XIAO footprint
+  and U3 PCB instance. Nominal 3D checks are below; physical fit is still pending.
+
+### Detailed 3D review
+
+Reviewed on 2026-09-12 using KiCad 10.0.6 STEP exports/renders and OpenCascade
+(`cadquery-ocp 8.0.1.0.0`). All 12 fitted components have models; test pads do not
+need separate models. The XIAO STEP is a **2024 mechanical snapshot**, not proof
+of the exact purchased module revision. See [model provenance and transform](../3d/README.md).
+Neither the electrical design, routing, land geometry, outline, nor BOM changed.
+
+| Nominal CAD check | Result |
+| --- | --- |
+| XIAO castellation rows | All 14 align to the footprint's seven 2.54 mm-pitch rows |
+| XIAO versus other fitted parts | No solid overlap; nearest is R24 at 1.82 mm; U4 at 2.82 mm |
+| XIAO / carrier substrate | No solid overlap; flat modeled underside at the mounting plane |
+| HDMI shell / carrier substrate | No solid overlap; tabs pass through the plated slots |
+| USB overhang beyond the carrier's upper edge | 1.512 mm; plug and strain relief not modeled |
+| Ceramic antenna projection / carrier material | Over the notch; minimum planar edge distance approximately 0.294 mm |
+| Overall modeled assembly envelope | Approximately 43.90 × 25.51 × 8.38 mm, including connector overhangs and shell tabs |
+
+The small antenna-to-notch edge distance is **not an RF clearance recommendation**.
+The existing all-layer copper keepout remains unchanged, but a successful geometric
+check does not establish reception, detuning, or enclosure/cable clearance.
+Verify Wi-Fi with physical parts and revise the keepout/notch if tests require it.
+
+The model's Z offset corrects its source origin; it does not add a solder standoff.
+The STEP export's 0.085 mm module-to-FR4 separation reflects the nominal mounting
+plane versus substrate geometry, which excludes copper/mask; it is not an assembly
+gap specification. Tolerances, solder, internal XIAO part interference, mating
+USB/HDMI plugs, enclosure, cable loads, and RF behavior are outside this audit.
+Confirm the older model against an actual XIAO before designing a close-fitting case.
+
+[Front](../hardware/rev2/assembly-3d-front.png) and
+[back](../hardware/rev2/assembly-3d-back.png) views,
+[assembly STEP](../hardware/rev2/assembly.step), and the
+[hashed solid-check report](../hardware/rev2/checks/mechanical-3d.json) are included.
 
 ## Resource provenance
 
@@ -146,7 +180,7 @@ Resources were retrieved on 2026-09-12 from the [Seeed resource list](https://wi
 | [XIAO footprints](https://files.seeedstudio.com/wiki/XIAO-KiCad-Library/New_XIAO_Series_Footprints.zip) | `XIAO-ESP32-C6-SMD.kicad_mod`, entry dated 2026-01-05; adapted as `hdmi2c:XIAO_ESP32C6_Castellated` |
 | [XIAO symbols](https://files.seeedstudio.com/wiki/XIAO-KiCad-Library/XIAO_Series_SCH_Symbols.zip) | Used as a pinout reference; local symbol describes the 14 connected castellations and power direction |
 | [Pinout workbook](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/res/XIAO_ESP32C6_Pinout.xlsx) | Cross-check of GPIO labels |
-| [XIAO 3D model](https://grabcad.com/library/seeed-studio-xiao-esp32-c6-1) | Inaccessible (HTTP 403); outstanding detailed mechanical reference |
+| [XIAO 3D model](https://grabcad.com/library/seeed-studio-xiao-esp32-c6-1) | User-supplied snapshot.3 ZIP; STEP dated 2024-11-06, imported unchanged; [hashes and placement](../3d/README.md) |
 | [Omron B3U datasheet](https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf) | B3U-1000P, non-illuminated top-actuated switch |
 
 Downloaded Seeed source hashes (SHA-256):
@@ -162,9 +196,10 @@ e2dae530c359e66ba704039f86cfea4bc316596fde367d992723509777746494  pinout XLSX
 Attribution: XIAO design and source library by Seeed Studio; the source schematic
 credits Linus.Liao and carries CC BY-SA 4.0. The adapted XIAO footprint preserves
 that attribution and is provided under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-Adaptations are limited to the carrier mounting lands, fabrication graphics,
-courtyard, name, and description. This notice does not relicense unrelated
-original HDMI2C assets or third-party KiCad libraries.
+Adaptations cover the carrier mounting lands, fabrication graphics, courtyard,
+name, description, and the linked 3D model's placement. This notice does not
+relicense the linked GrabCAD STEP, unrelated original HDMI2C assets, or third-party
+KiCad libraries; the STEP archive has no explicit license file.
 
 ## Physical bring-up — not performed
 
@@ -203,8 +238,10 @@ lists them explicitly. No rules were disabled to obtain the rev2 result.
 | Independent electrical-contract / netlist comparison | 38 matching pin groups, including 24 intentional NC groups |
 | XIAO footprint comparison to downloaded Seeed library | All 14 side-pad positions, sizes, and numbers match |
 | PCB outline | 42 × 24 mm; approximately 915.64 mm² material area |
-| Regression tests | 6 pass: valid design and five deliberate fault cases |
-| Visual review | Schematic, front/back assembly and copper, plated-slot drill output |
+| Regression tests | 9 pass: valid design and eight deliberate fault cases |
+| XIAO model contract | Pinned STEP hash and identical reviewed transforms in library and PCB |
+| Nominal 3D checks | XIAO/carrier/component clearances, antenna projection, HDMI shell/slot clearance; details above |
+| Visual review | Schematic, front/back assembly and copper, plated-slot drill output, detailed front/back 3D views |
 | Physical, RF, USB/programming, monitor, and ESD tests | Not performed |
 
 The routing was assisted locally by Freerouting 2.4.1, with manual local bypass
@@ -213,14 +250,17 @@ zone refill. KiCad DRC is the final CAD acceptance check, not the router's score
 There are 221 track segments and 33 vias. No fabrication order was placed.
 
 The [prototype package](../hardware/rev2/README.md) contains the BOM, placements,
-assembly drawings, schematic PDF, Gerbers, drills, and machine-readable reports.
-Run `bash scripts/export_rev2.sh` after edits; it stops on failed checks.
+assembly drawings/STEP/renders, schematic PDF, Gerbers, drills, and reports.
+Run `bash scripts/export_rev2.sh` after edits; it stops on failed CAD/contract tests.
+The package README also gives the separate optional OpenCascade command to refresh
+the solid-check report. Its source/STEP hashes identify the assembly actually checked.
 `python3 -m unittest discover -s tests -v` exercises swapped SDA/SCL, a direct
-5 V-to-GPIO miswire, changed land geometry, and missing/weakened antenna keepouts.
+5 V-to-GPIO miswire, changed land geometry, missing/weakened antenna keepouts,
+and missing/rotated/vertically misplaced XIAO models.
 These are design-regression checks, not circuit simulation or evidence that DDC
 works on a monitor.
 
 Next: use the 1:1 fit print and physical bring-up checklist before trusting a
 prototype. Stage 3 can begin its ESPHome component/configuration work against the
 pin contract above when requested, without marking the physical stage-2 milestone
-complete. Obtain the XIAO model or measure a sample before enclosure design.
+complete. Compare this older XIAO model with a sample before enclosure design.

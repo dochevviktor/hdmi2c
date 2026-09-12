@@ -39,6 +39,14 @@ kicad-cli pcb export svg --layers F.Cu,F.SilkS,Edge.Cuts --fit-page-to-board \
 kicad-cli pcb export svg --layers B.Cu,B.SilkS,Edge.Cuts --fit-page-to-board \
   --mirror --mode-single --output "$artifact_dir/copper-back.svg" hdmi2c.kicad_pcb
 
+# Nominal assembly geometry, not a physical fit or RF qualification.
+# Requires KiCad's standard 3D-model library in addition to the local models.
+kicad-cli pcb export step --force --output "$artifact_dir/assembly.step" hdmi2c.kicad_pcb
+kicad-cli pcb render --width 1400 --height 900 --quality high --rotate '330,0,30' \
+  --output "$artifact_dir/assembly-3d-front.png" hdmi2c.kicad_pcb
+kicad-cli pcb render --width 1400 --height 900 --quality high --side bottom --rotate '30,0,30' \
+  --output "$artifact_dir/assembly-3d-back.png" hdmi2c.kicad_pcb
+
 # Gerbers, drills and positions all use the absolute KiCad origin, in mm.
 kicad-cli pcb export gerbers --layers F.Cu,B.Cu,F.Paste,B.Paste,F.Mask,B.Mask,F.SilkS,B.SilkS,Edge.Cuts \
   --output "$artifact_dir/fabrication/" hdmi2c.kicad_pcb
@@ -49,5 +57,8 @@ kicad-cli pcb export drill --format excellon --drill-origin absolute --excellon-
 # Hash the exact source inputs to make stale output packages recognizable.
 sha256sum hdmi2c.kicad_sch hdmi2c.kicad_pcb hdmi2c.kicad_pro hdmi2c.kicad_sym \
   hdmi2c.pretty/XIAO_ESP32C6_Castellated.kicad_mod \
-  hdmi2c.pretty/WURTH_685119134923_HDMI.kicad_mod > "$artifact_dir/checks/source-sha256.txt"
+  hdmi2c.pretty/WURTH_685119134923_HDMI.kicad_mod \
+  3d/Seeed_Studio_XIAO_ESP32C6.step 3d/WURTH_685119134923_HDMI.STEP \
+  > "$artifact_dir/checks/source-sha256.txt"
+echo 'Solid-clearance review is separate: see hardware/rev2/README.md to refresh its hashed report.'
 echo "Prototype package updated: $artifact_dir (physical validation still required)."

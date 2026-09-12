@@ -72,9 +72,12 @@ verification results. A physical build is a separate validation milestone.
 - [x] Run ERC, DRC, schematic/PCB parity, and a datasheet/2D footprint/connector
   review. Generate a BOM, assembly view, schematic PDF, Gerbers, and drills for
   the reviewed revision.
+- [x] Integrate the user-supplied detailed XIAO STEP model; align it in the library
+  and PCB, review nominal solid clearances, and export assembly STEP/front/back
+  views. Record model provenance, transform, and repeatable checks.
 - [ ] Verify the 1:1 land print against physical samples and assembled/enclosure
-  clearances. Seeed's linked detailed 3D model returned HTTP 403; the CAD review
-  used the official 2D footprint/project, not a complete 3D assembly.
+  clearances. Compare the 2024 model snapshot with the actual purchased module;
+  cable plugs, solder, tolerances, and RF behavior remain unverified.
 - [ ] Bring up hardware: check USB, 3.3 V and HDMI 5 V rails, boot/programming,
   Wi-Fi reception, DDC idle levels and waveforms, and HPD/enable behavior.
 
@@ -205,3 +208,35 @@ firmware remains unimplemented. Baseline at this session's start: `af1aed1`.
   the power/USB/RF/DDC bring-up checklist. Detailed XIAO 3D fit remains pending.
   Next software action, when requested: start stage 3 against the rev2 pin contract,
   review reference project commits/licenses, then pin and compile ESPHome/C6.
+
+### 2026-09-12 — detailed XIAO 3D model follow-up
+
+Status: **nominal 3D review complete; physical stage-2 acceptance still pending.**
+Baseline: `59bcef6`. The user supplied the previously inaccessible GrabCAD ZIP.
+
+- Imported its STEP unchanged as `3d/Seeed_Studio_XIAO_ESP32C6.step` and linked it
+  with the same transform in the local footprint and U3 PCB instance. Source
+  dates, hashes, coordinate alignment, and licensing caveat are in
+  [3d/README.md](3d/README.md). It is a 2024 model, not confirmation of the exact
+  2026 schematic/purchased board revision; its `v7` label is not a hardware revision.
+- All 14 castellation rows align. No nominal solid interference between the
+  XIAO and carrier/other fitted parts; nearest component R24 is 1.82 mm away.
+  HDMI shell tabs also clear the carrier substrate through their slots.
+- Antenna projection is over the notch, with approximately 0.294 mm minimum
+  planar distance to carrier material. This small margin is geometric only;
+  physical Wi-Fi/enclosure/cable testing remains mandatory, not a CAD pass.
+- Assembly model envelope is approximately 43.90 × 25.51 × 8.38 mm, including
+  connector overhangs and shell tabs, excluding solder/cables. Added front/back
+  renders, assembly STEP, and a hashed [solid-check report](hardware/rev2/checks/mechanical-3d.json).
+- No schematic, land geometry, routing, board-outline, or BOM changes. U3 still
+  counts as one purchased assembly; there are 12 fitted components.
+- Verification: 0 ERC/DRC/parity/unrouted findings, 38 matching pin groups, and
+  nine regression tests pass, including missing/rotated/misplaced model cases.
+  `scripts/export_rev2.sh` now exports the 3D assets and hashes the local models.
+  A separate optional OpenCascade audit refreshes the solid-check report; see
+  [package instructions](hardware/rev2/README.md#repeat-the-solid-clearance-review).
+- Unrelated `.history` changes were preserved. No commit, push, publication,
+  fabrication order, physical test, or stage-3 firmware implementation was done.
+- Next physical action: compare an actual XIAO/HDMI socket with the 1:1 print and
+  model, check mating plugs/enclosure support, then run the power/USB/RF/DDC
+  checklist. Next software action, when requested: stage 3 against the rev2 pins.

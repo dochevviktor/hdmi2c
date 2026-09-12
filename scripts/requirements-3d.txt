@@ -1,0 +1,2 @@
+# Optional solid-clearance audit; not needed for KiCad exports or electrical checks.
+cadquery-ocp==8.0.1.0.0

@@ -2768,6 +2768,17 @@
 			(uuid "44259696-64db-4635-bedc-38fc3d961cc4")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3d/Seeed_Studio_XIAO_ESP32C6.step"
+			(offset
+				(xyz 15.0014 8.759341 0.25)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 -90)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")

@@ -36,6 +36,12 @@ def make_fixture(case, output):
             board.Remove(zone)
         else:
             zone.SetDoNotAllowTracks(False)
+    elif case == "test_missing_xiao_model":
+        feet["U3"].Models().clear()
+    elif case == "test_wrong_xiao_model_rotation":
+        feet["U3"].Models()[0].m_Rotation.z = 90
+    elif case == "test_wrong_xiao_model_height":
+        feet["U3"].Models()[0].m_Offset.z = 0
     elif case != "test_reviewed_design":
         raise ValueError(f"Unknown fixture: {case}")
     k.SaveBoard(output, board)
@@ -80,6 +86,15 @@ class Rev2Checks(unittest.TestCase):
 
     def test_weakened_antenna_keepout(self):
         self.check_result("Weakened keepout")
+
+    def test_missing_xiao_model(self):
+        self.check_result("XIAO must have exactly one detailed 3D model")
+
+    def test_wrong_xiao_model_rotation(self):
+        self.check_result("XIAO 3D model m_Rotation changed")
+
+    def test_wrong_xiao_model_height(self):
+        self.check_result("XIAO 3D model m_Offset changed")
 
 
 if __name__ == "__main__":

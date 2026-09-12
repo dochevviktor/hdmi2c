@@ -8,12 +8,18 @@ Optional --seeed-footprints compares lands with the downloaded official library.
 
 import argparse
 from collections import defaultdict
+import hashlib
 from pathlib import Path
 import sys
 
 import pcbnew as k
 
 from check_connectivity import compare, schematic_groups
+
+
+ROOT = Path(__file__).resolve().parents[1]
+XIAO_MODEL = "3d/Seeed_Studio_XIAO_ESP32C6.step"
+XIAO_MODEL_SHA256 = "2e1ce01f4497192485823ca9fffd68e323bafc84cd7b85c2906b5497550be8fc"
 
 
 # Reviewed against Seeed V1.0 and TI's PW (not RKT) package pin table.
@@ -63,6 +69,20 @@ def lands(footprint):
                           mm_pair(pad.GetSize()))
         for pad in footprint.Pads()
     }
+
+
+def check_xiao_model(footprint):
+    models = list(footprint.Models())
+    require(len(models) == 1, "XIAO must have exactly one detailed 3D model")
+    model = models[0]
+    require(model.m_Filename == "${KIPRJMOD}/" + XIAO_MODEL and model.m_Show,
+            "XIAO 3D model must be visible and project-relative")
+    for field, expected in (("m_Offset", (15.0014, 8.759341, .25)),
+                            ("m_Rotation", (-90, 0, -90)), ("m_Scale", (1, 1, 1))):
+        vector = getattr(model, field)
+        actual = (vector.x, vector.y, vector.z)
+        require(all(abs(a - b) < 1e-6 for a, b in zip(actual, expected)),
+                f"XIAO 3D model {field} changed: {actual}")
 
 
 def main():
@@ -115,6 +135,16 @@ def main():
         require(source_lands == expected_lands, "Downloaded Seeed lands differ from reviewed snapshot")
         print("PASS: All 14 castellation lands match the official Seeed library")
     print("PASS: 14-pad XIAO mounting pattern; no underside test/battery lands")
+
+    model_path = ROOT / XIAO_MODEL
+    require(model_path.is_file(), "Missing local XIAO STEP file")
+    require(hashlib.sha256(model_path.read_bytes()).hexdigest() == XIAO_MODEL_SHA256,
+            "XIAO STEP differs from the reviewed snapshot; repeat the mechanical review")
+    check_xiao_model(feet["U3"])
+    library_footprint = k.FootprintLoad(str(ROOT / "hdmi2c.pretty"), "XIAO_ESP32C6_Castellated")
+    require(library_footprint is not None, "Cannot load local XIAO footprint")
+    check_xiao_model(library_footprint)
+    print("PASS: Pinned XIAO STEP and reviewed transform in PCB and footprint library")
 
     outline = k.SHAPE_POLY_SET()
     require(board.GetBoardPolygonOutlines(outline, False), "Invalid board outline")

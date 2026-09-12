@@ -372,4 +372,15 @@
 
 
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/3d/Seeed_Studio_XIAO_ESP32C6.step"
+		(offset
+			(xyz 15.0014 8.759341 0.25)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 -90)
+		)
+	)
 )
