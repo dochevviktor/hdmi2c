@@ -4,3 +4,4 @@ fp-info-cache
 *.kicad_prl
 
 hdmi2c-backups/
+__pycache__/

@@ -1,6 +1,6 @@
 (footprint "WURTH_685119134923_HDMI" (version 20201220) (generator pcbnew) (layer "F.Cu")
   (tedit 6011F47E)
-  (fp_text reference "REF**" (at 0.75 -7.15 unlocked) (layer "F.SilkS")
+  (fp_text reference "REF**" (at 0.75 -7.15 unlocked) (layer "F.Fab")
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 3b70116c-2d7c-4e5c-8b09-cb690e909e2f)
   )
@@ -36,4 +36,13 @@
   (pad "SH" thru_hole oval (at 7.25 6.85) (size 1.5 2.7) (drill oval 0.9 2.1) (layers *.Cu *.Mask) (tstamp aa554451-3a98-4dd3-9ab4-5886f358dc89))
   (pad "SH" thru_hole oval (at 7.25 0.85) (size 1.5 3.3) (drill oval 0.9 2.7) (layers *.Cu *.Mask) (tstamp c6c1ea92-aa45-47dc-b830-c395f53f0a4e))
   (pad "SH" thru_hole oval (at -7.25 6.85) (size 1.5 2.7) (drill oval 0.9 2.1) (layers *.Cu *.Mask) (tstamp fe4f395d-fa9b-4682-aefe-9da55435fe30))
+
+ (attr through_hole)
+ (fp_rect (start -7.5 -1.65) (end 7.5 10.4) (layer "F.Fab") (width 0.1) (fill none))
+ (fp_rect (start -8.25 -1.9) (end 8.25 10.65) (layer "F.CrtYd") (width 0.05) (fill none))
+ (model "${KIPRJMOD}/3d/WURTH_685119134923_HDMI.STEP"
+      (offset (xyz 0 -3.1 3.4))
+      (scale (xyz 1 1 1))
+      (rotate (xyz -90 0 0))
+    )
 )

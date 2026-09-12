@@ -12,8 +12,9 @@ and controlled over Wi-Fi using ESPHome. Initial controls are brightness and inp
 selection through DDC/CI over I2C. The final MCU board is a Seeed Studio XIAO
 ESP32-C6. USB supplies power; the HDMI connection does not carry video.
 
-The stages below are sequential. The current implementation request is stage 1;
-stages 2 and 3 are planned follow-ups.
+The stages below are sequential. Stage 1 is complete in CAD. The current
+implementation request is stage 2; stage 3 is the planned firmware follow-up.
+Stage 2 is now complete in CAD as `rev2`; its physical bring-up is still pending.
 
 ## Stage 1 — one HDMI port
 
@@ -47,30 +48,33 @@ verification results. A physical build is a separate validation milestone.
 
 ## Stage 2 — XIAO ESP32-C6 carrier
 
-- [ ] Read Seeed's schematic, pinout, dimensions, and CAD resources; record the
+- [x] Read Seeed's schematic, pinout, dimensions, and CAD resources; record the
   exact module revision and resource versions used. The documented module size
   is 21 × 17.8 mm. This is a carrier redesign, not a pin-compatible WROOM swap.
-- [ ] Add/verify a local symbol and footprint for the complete XIAO board,
+- [x] Add/verify a local symbol and footprint for the complete XIAO board,
   including pad numbering, mounting method, USB clearance, antenna clearance,
   and access to boot/reset. Prefer soldered castellated pads for compactness;
   check assembly access before fixing the layout.
-- [ ] Create an explicit old-to-new signal mapping. Start with XIAO `D4/GPIO22`
+- [x] Create an explicit old-to-new signal mapping. Start with XIAO `D4/GPIO22`
   for SDA and `D5/GPIO23` for SCL; select remaining exposed GPIOs for HDMI 5 V
   enable, HPD input, and any retained buttons after checking boot constraints.
   Reserve the board's antenna-control GPIOs according to Seeed's documentation.
-- [ ] Use the XIAO's USB-C power/programming connection and onboard regulation.
+- [x] Use the XIAO's USB-C power/programming connection and onboard regulation.
   Remove the redundant WROOM, USB connector, USB-UART bridge, auto-programming
   circuit, and associated parts once their replacement paths are confirmed.
-- [ ] Review the HDMI electrical interface: 3.3 V/5 V level shifting, pull-ups,
+- [x] Review the HDMI electrical interface: 3.3 V/5 V level shifting, pull-ups,
   HPD divider, common ground/shield, ESD, enable defaults, and backfeed behavior.
   Audit the inherited 5 V LDO/pass-FET circuit with USB input voltage and dropout
   in mind before deciding to retain or replace it. Do not wire 5 V DDC directly
   to an ESP32 GPIO.
-- [ ] Redraw and compact the carrier PCB around one HDMI connector and the XIAO.
+- [x] Redraw and compact the carrier PCB around one HDMI connector and the XIAO.
   Revisit buttons and mounting holes only as needed for the smaller layout.
-- [ ] Run ERC, DRC, schematic/PCB parity, and a physical footprint/connector
+- [x] Run ERC, DRC, schematic/PCB parity, and a datasheet/2D footprint/connector
   review. Generate a BOM, assembly view, schematic PDF, Gerbers, and drills for
   the reviewed revision.
+- [ ] Verify the 1:1 land print against physical samples and assembled/enclosure
+  clearances. Seeed's linked detailed 3D model returned HTTP 403; the CAD review
+  used the official 2D footprint/project, not a complete 3D assembly.
 - [ ] Bring up hardware: check USB, 3.3 V and HDMI 5 V rails, boot/programming,
   Wi-Fi reception, DDC idle levels and waveforms, and HPD/enable behavior.
 
@@ -118,14 +122,14 @@ controls over Wi-Fi, with readback/error handling and recorded monitor tests.
 - Keep the monitor's normal video connection separate. HDMI passthrough, dual
   monitors on one carrier, Zigbee/Matter, and ambient-light/IR features are outside
   the current scope.
-- Stage 1 keeps the existing power architecture and GPIO mapping. Stage 2 must
-  review these instead of assuming the smaller board is electrically identical.
+- Stage 1 kept the existing power architecture and GPIO mapping. Stage 2 replaces
+  these with the XIAO and TPD12S016PWR; use the new firmware pin contract in
+  [stage-2 hardware notes](docs/stage2-hardware.md), including the new DDC enable.
 - Preserve user changes. At the start of this work, `hdmi2c.kicad_pro` already had
   KiCad version/settings changes, and `.history/` and `.idea/` were untracked.
-- CAD formats retained: schematic 20211123 and PCB 20211014. KiCad CLI 10.0.6 is
-  installed in the current environment. Zone refill was performed on a temporary
-  copy and the filled polygon transferred back without converting the working
-  board to the newer file format.
+- Stage 1 retained schematic 20211123 / PCB 20211014. The stage-2 redraw uses
+  schematic 20250114 / PCB 20260206, verified with KiCad 10.0.6. Use KiCad 10 for
+  the new carrier. The rev1 files remain available in Git history.
 
 ## References
 
@@ -170,3 +174,34 @@ Status: stage 1 complete in CAD; hardware validation remains outstanding.
   mechanical footprint, and explicit pin/power mapping. Review the inherited
   HDMI supply circuit and CAD findings as part of that redesign. Do not begin
   the ESPHome implementation with the old WROOM pin mapping.
+
+### 2026-09-12 — stage 2 XIAO carrier
+
+Status: **CAD complete; physical stage-2 acceptance not yet achieved.** Stage 3
+firmware remains unimplemented. Baseline at this session's start: `af1aed1`.
+
+- U3 is the complete XIAO ESP32-C6 V1.0, using Seeed's January 2026 schematic and
+  reviewed 14 castellation lands. Resource links, hashes, and attribution are in
+  [stage-2 hardware notes](docs/stage2-hardware.md).
+- Replaced the WROOM support circuits and discrete HDMI interface with a
+  USB-powered XIAO plus TPD12S016PWR. DDC remains properly level translated;
+  CT_HPD and LS_OE have independent GPIOs and reset-off pulldowns. HDMI shell and
+  signal grounds are now directly common. No external battery supply is used.
+- Board is 42 × 24 mm (68% smaller bounding-box area than stage 1), with antenna
+  cutout and copper keepouts. 12 fitted components / 16 footprints, including
+  two smaller top-actuated buttons and four back-side test pads. No screw holes.
+- Pin contract: GPIO22 SDA, GPIO23 SCL, GPIO0 HDMI 5 V enable, GPIO1 DDC enable,
+  GPIO2 HPD, GPIO19/20 buttons. Reserve GPIO3/14 for the XIAO antenna controls.
+  Enable HDMI 5 V before DDC; disable DDC before removing HDMI 5 V.
+- Verification: 0 ERC, 0 DRC, 0 unrouted, 0 parity findings; 38 matching pin
+  groups; all 14 lands compared against Seeed; six regression tests pass.
+  No exclusions were introduced. All CAD issues inherited from rev1 are gone.
+- Generated [rev2 prototype package](hardware/rev2/README.md), including BOM,
+  assembly views, 1:1 fit print, schematic PDF, Gerbers, drills, and reports.
+  Reproduce with `bash scripts/export_rev2.sh`; it gates exports on checks/tests.
+- Unrelated user changes in `.history` were preserved. Existing upstream Pages
+  automation was not upgraded or run. No order, push, or commit was made.
+- Next physical action: verify actual parts against the fit print, then perform
+  the power/USB/RF/DDC bring-up checklist. Detailed XIAO 3D fit remains pending.
+  Next software action, when requested: start stage 3 against the rev2 pin contract,
+  review reference project commits/licenses, then pin and compile ESPHome/C6.

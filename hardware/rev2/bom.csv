@@ -1,0 +1,8 @@
+"References","Value","Footprint","Quantity","Manufacturer","MPN","Specification","Datasheet"
+"C1-C3","100nF","Capacitor_SMD:C_0603_1608Metric","3","Generic","Select to specification","100 nF; >=16 V; X7R; +/-10%; 0603",""
+"J7","HDMI1","hdmi2c:WURTH_685119134923_HDMI","1","Wurth Elektronik","685119134923","HDMI Type A receptacle; SMT contacts and plated-slot shell tabs","https://www.we-online.com/components/products/datasheet/685119134923.pdf"
+"R24,R25","100k","Resistor_SMD:R_0603_1608Metric","2","Generic","Select to specification","100 kohm; >=0.1 W; +/-1%; 0603",""
+"R26,R27","10k","Resistor_SMD:R_0603_1608Metric","2","Generic","Select to specification","10 kohm; >=0.1 W; +/-1%; 0603",""
+"SW2,SW3","B3U-1000P","Button_Switch_SMD:SW_SPST_B3U-1000P","2","Omron","B3U-1000P","Top-actuated SPST-NO; no locating boss","https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf"
+"U3","XIAO ESP32-C6","hdmi2c:XIAO_ESP32C6_Castellated","1","Seeed Studio","XIAO ESP32-C6","Complete V1.0 module; 14 soldered castellations; 4 MB flash","https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32C6/XIAO_ESP32_C6_v1.0_SCH_260114.pdf"
+"U4","TPD12S016PWR","Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm","1","Texas Instruments","TPD12S016PWR","PW/TSSOP-24; do not substitute the RKT pinout","https://www.ti.com/lit/ds/symlink/tpd12s016.pdf"

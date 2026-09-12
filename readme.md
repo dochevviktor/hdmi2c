@@ -5,12 +5,15 @@ HDMI2C allows network control (via WiFi) of monitors connected to it via HDMI (v
 rather than relying on awkward inconvient buttons and OSDs. Think of it as an API for
 your monitors.
 
-This repository contains the hardware design, made with [KiCAD]. You can see the
-generated BOM and schematic [here][pages].
+This repository contains the hardware design, made with [KiCAD]. The current
+**rev2 XIAO ESP32-C6 carrier is CAD-checked but not physically tested**. Its
+[prototype package](hardware/rev2/README.md) includes the BOM, schematic, assembly
+drawings, Gerbers, and drills. Open the current project with KiCad 10.
 
 The staged plan for a single-monitor board, XIAO ESP32-C6 migration, and ESPHome
 firmware is in [PLAN.md](PLAN.md), including progress and handoff notes for future
-sessions. The linked upstream BOM and schematic describe the original revision.
+sessions. The [upstream BOM and schematic][pages] describe the original revision,
+not the current carrier.
 
 ## What could you build with this
 
@@ -21,20 +24,23 @@ sessions. The linked upstream BOM and schematic describe the original revision.
 
 ## Features
 
-- ESP32-WROOM-32 WiFi MCU (XIAO ESP32-C6 migration planned)
-- USB-C power and MCU serial connection
-  - With blinkenlights
+- Seeed Studio XIAO ESP32-C6 with Wi-Fi; soldered castellated mounting
+- The XIAO's USB-C power, native programming/logging, regulator, and boot/reset
 - One HDMI port (`J7`, HDMI1) with:
-  - Level shifters to bring 5v DDC signals to 3.3v for the MCU.
-  - 5v HDMI presence detection, switchable from the MCU. This allows us to fake being
-    unplugged and replugged from HDMI, if we need to.
-- Two forward facing buttons
-- 70 × 45 mm PCB, reduced from the original 95 × 45 mm
+  - TPD12S016PWR-based 3.3 V/5 V DDC translation and buffered HPD input
+  - Independently controlled DDC enable and protected HDMI 5 V output
+- Two small top-actuated buttons and four back-side diagnostic pads
+- 42 × 24 mm two-layer carrier with antenna cutout and copper keepouts
 
-The single-port revision removes HDMI2 and its supporting circuitry: 15 fewer
-components and approximately 26% less board area. See the
-[hardware verification notes](docs/stage1-validation.md) for checks and remaining
-findings. This revision has not yet been tested on physical hardware.
+Rev2 has 12 fitted components, including the purchased XIAO module, and a 68%
+smaller bounding-box area than the 70 × 45 mm single-port rev1. Connector overhangs
+are outside those dimensions. There are no mounting holes; provide enclosure
+support and cable strain relief.
+
+See the [hardware notes and pin mapping](docs/stage2-hardware.md) for design
+decisions, resource provenance, verification, and outstanding physical tests.
+ERC/DRC and schematic/PCB parity are clean; six design-regression tests pass.
+Historical rev1 findings are recorded in [stage-1 validation](docs/stage1-validation.md).
 
 ## Firmware
 
@@ -51,11 +57,12 @@ kind of a deal breaker.
 
 ### Known good monitors
 
-- Dell U2515h - I personally have two of these and they work flawlessly.
+- Dell U2515h — reported working by the original project's author with the
+  original hardware/firmware; not yet retested with this XIAO/ESPHome redesign.
 
-## Improvements for next rev
+## Deferred ideas (outside the current plan)
 
-- Just use M3 mounting holes, M2.5 was a terrible idea
+- A larger carrier option with mounting holes
 - Spare ESP32 IO broken out to headers for ease of hacking
 - More ambitious, HDMI passthrough to allow use of the project without taking up a whole
   spare HDMI port.
