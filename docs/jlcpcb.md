@@ -1,8 +1,9 @@
 # JLCPCB preparation — rev2
 
-Factory/part review 2026-09-12; automation verification 2026-09-13.
+Factory/part review 2026-09-12; J7 confirmation and verification 2026-09-13.
 **CAD checks pass; the assembly order is not ready.**
-J7 sourcing, assembler acceptance, and the final placement file remain unresolved.
+All 12 fitted component identities are now matched. Assembler acceptance,
+current availability, and the final placement file still require confirmation.
 No files were uploaded, no parts reserved, and no order placed.
 
 ## Template and board settings
@@ -60,7 +61,8 @@ reductions were used. Existing unrelated project preferences were preserved.
 
 ## Part selections
 
-The user's [matching CSV](../hardware/rev2/bom.csv) is preserved byte-for-byte.
+The user's [matching CSV](../hardware/rev2/bom.csv) is preserved except for the
+explicit J7 correction below, based on the user's new selection on 2026-09-13.
 Its duplicate `JLCPCB Part #` headers contain an empty input column and a populated
 selected-part column; it also contains multiline descriptions and ranged
 designators. It is a matching report, **not the clean upload BOM**.
@@ -73,22 +75,29 @@ designators. It is a matching report, **not the clean upload BOM**.
 | R24, R25 | FOJAN FRH0603B1003TS / [C51048211](https://jlcpcb.com/partdetail/FOJAN-FRH0603B1003TS/C51048211) | 100 kΩ, 0.1 W, ±0.1%, 0603; meets design requirements |
 | R26, R27 | Sunway SC0603F1002F2BNRH / [C3152123](https://jlcpcb.com/partdetail/Sunway-SC0603F1002F2BNRH/C3152123) | 10 kΩ, 0.1 W, ±1%, 0603; meets requirements |
 | C1–C3 | YAGEO CC0603KRX7R9BB104 / [C14663](https://jlcpcb.com/partdetail/YAGEO-CC0603KRX7R9BB104/C14663) | 100 nF, 50 V, X7R, ±10%, 0603; exceeds the minimum 16 V requirement |
-| J7 | Selected PI3HDMI1310-AZLEX / C516617 | **Rejected: an IC, not a connector** |
+| J7 | Würth 685119134923 / [C2930961](https://jlcpcb.com/partdetail/WurthElektronik-685119134923/C2930961) | Exact existing HDMI Type A socket; no footprint substitution |
 
 The passive-component warnings compare engineering values such as `100k` with
 MPN strings. Those warnings do not by themselves indicate an electrical mismatch;
 the actual selected specifications above were reviewed. Manufacturer/MPN/LCSC
-fields for the six suitable groups (11 components) are saved in the schematic
+fields for all seven groups (12 components) are saved in the schematic
 and PCB. Stock, price, quoted order quantities, and setup fees are not pinned or
 guaranteed by this review; the CSV's commercial data is only the user's snapshot.
 
-J7 requires the [Würth 685119134923 HDMI receptacle](https://www.we-online.com/components/products/datasheet/685119134923.pdf).
-The selected [PI3HDMI1310-A](https://www.diodes.com/part/view/PI3HDMI1310-A) is a
-72-contact HDMI switching IC and cannot fit or replace it. No verified JLCPCB
-catalog code for the exact Würth connector was found in this review. Retain the
-socket pending a choice between sourcing/consignment through JLCPCB, hand-fitting
-it after delivery, or reviewing a stocked connector and any required footprint
-redesign. None of those choices has been executed.
+J7 is the [Würth 685119134923 HDMI receptacle](https://www.we-online.com/components/products/datasheet/685119134923.pdf).
+The user's **C2930961** selection was confirmed against the JLCPCB listing above
+and [LCSC's catalog](https://www.lcsc.com/product-detail/C2930961.html), both of
+which identify this exact manufacturer part. The manufacturer's land pattern
+matches the existing 19 pads at 0.50 mm pitch, 0.28 × 2.60 mm signal lands, and
+14.50 mm shell-tab column spacing. No pad, slot, outline, route or 3D-model change
+is required. Its catalog listing specifies Economic/Standard SMT assembly, but
+the four plated-slot shell tabs still need explicit soldering-process confirmation.
+
+The original auto-match, PI3HDMI1310-AZLEX / C516617, was a switching IC and remains
+rejected. Only J7's row was manually corrected in the matching CSV. Its obsolete
+IC pricing, stock/MOQ and account-quantity fields were cleared, not transferred
+to the socket; the user's requested quantity of five was retained. Other rows
+remain byte-identical. Export/validation scripts still never rewrite this input.
 
 ## Files and export safety
 
@@ -98,10 +107,11 @@ redesign. None of those choices has been executed.
   specifications and purchasing fields; 12 fitted parts.
 - [bom-jlcpcb-draft.csv](../hardware/rev2/bom-jlcpcb-draft.csv): clean, uniquely
   headed **draft** using MPNs as comments, expanded references, and quantities per
-  board. J7 remains present with its correct MPN and a blank LCSC code. It is not
-  silently omitted or assigned the incorrect IC.
+  board. All seven groups / 12 components have reviewed codes, including J7
+  `685119134923` / `C2930961`. It remains a draft until assembly review is complete.
 - [BOM audit](../hardware/rev2/checks/jlcpcb-bom.json): records source hashes and
-  the unresolved/rejected J7 mapping. `ready_for_order` remains false.
+  all 12 reviewed identities. `unresolved_references` is empty, but
+  `ready_for_order` remains false until the separate assembly checks are complete.
 
 The column format follows JLCPCB's [KiCad export guide](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad).
 The existing `positions-front.csv` is still **raw KiCad placement data**, not an
@@ -113,15 +123,39 @@ the raw coordinate columns and assume the two custom parts will be placed correc
 ```sh
 bash scripts/export_rev2.sh
 sha256sum -c hardware/rev2/checks/source-sha256.txt
-# Strict purchasing check: currently exits 1 because J7 is unresolved.
+# Strict purchasing-identity check: now exits 0; this is not assembly approval.
 python3 scripts/check_jlcpcb_bom.py hardware/rev2/bom.csv hardware/rev2/checks/netlist.xml \
   --report hardware/rev2/checks/jlcpcb-bom.json
 ```
 
-The main export explicitly permits only the known J7 blocker to produce a draft;
-other mismatches stop it. Update purchasing fields and the reviewed part contract
+Every purchasing identity/footprint mismatch now stops the main export; the old
+J7 exception has been removed. Update purchasing fields and the reviewed part contract
 together after approving a new selection. Re-export and refresh the separate
 solid-check report as described in the [package README](../hardware/rev2/README.md).
+
+## Files to submit
+
+Yes: the normal JLCPCB handoff is **one fabrication ZIP plus a BOM and a CPL**.
+Keep all three synchronized to the same reviewed design revision.
+
+| Upload | Contents / current project file |
+| --- | --- |
+| Fabrication ZIP | ZIP the contents of `hardware/rev2/fabrication/`: copper, solder mask, silkscreen, paste, outline **and `.drl` drill files**. Keep the antenna cutout and HDMI plated-slot routing; drill-map PDFs and `.gbrjob` are supplementary. |
+| BOM | Use the clean `hardware/rev2/bom-jlcpcb-draft.csv` for matching/review, not the duplicate-header `bom.csv` matching report. It now includes C2930961 and all 12 fitted parts; finalize the order only after assembly signoff. |
+| Centroid / CPL / pick-and-place | Finalize from `hardware/rev2/positions-front.csv`, with `Designator,Mid X,Mid Y,Rotation,Layer`, mm units, and verified origin/rotation corrections. The current raw export is **not the finalized upload CPL**. |
+
+This follows JLCPCB's [Gerber/drill guide](https://jlcpcb.com/help/article/how-to-generate-gerber-and-drill-files-in-kicad-9)
+and [BOM/CPL guide](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad).
+J7 is mixed SMT/plated-slot, so keep it in the placement list even though KiCad
+marks the footprint through-hole. TP1–TP4 are etched test pads, not purchased parts.
+No schematic or STEP upload is normally part of these three required file sets;
+an assembly drawing or process note can support the XIAO/HDMI handling review.
+
+File upload alone is not the final approval: select/confirm the two-layer 1.6 mm,
+1 oz/green-mask board options and assembly service, check the Gerber preview and
+part matches, and inspect placement orientation before paying. In particular,
+verify USB direction, HDMI direction and pin 1, and agree on XIAO reflow handling
+and soldering all four HDMI shell tabs. No files were submitted by this work.
 
 ## Assembly decisions still required
 
@@ -132,8 +166,9 @@ that alone does not establish acceptance of these parts. Standard would require
 a suitable larger panel/tooling arrangement. Their [assembly capabilities](https://jlcpcb.com/capabilities/pcb-assembly-capabilities)
 also distinguish tooling/fiducial requirements by service.
 
-- [ ] Resolve J7 sourcing and explicitly include soldering its four plated-slot
-  shell tabs, not just its SMT contacts.
+- [x] Resolve J7's exact catalog identity: Würth 685119134923 / C2930961.
+- [ ] Confirm current J7 availability and explicitly include soldering its four
+  plated-slot shell tabs, not just its SMT contacts.
 - [ ] Have JLCPCB confirm placement and the soldering profile for the **complete
   XIAO module**; a catalog listing is not approval of this custom carrier mounting.
 - [ ] Confirm Economic versus Standard, actual component availability, finish,
@@ -148,7 +183,7 @@ the purchased XIAO. Do not select special carrier edge-plating/castellation
 fabrication solely because the module uses castellated mounting.
 
 Validation: KiCad 10.0.6 ERC/DRC/parity/unrouted **0 findings**, 38 matching pin
-groups, and **18 regression tests pass** (10 design, 6 BOM, 2 preview safety).
+groups, and **20 regression tests pass** (10 design, 8 BOM, 2 preview safety).
 The [review workflow](automation.md) also passes the same checks in its pinned
 KiCad 10.0.5 container. Nominal 3D clearances are unchanged and the separate
 solid report now matches the current STEP/source hashes. This is CAD/purchasing

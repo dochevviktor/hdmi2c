@@ -84,7 +84,9 @@ verification results. A physical build is a separate validation milestone.
 - [x] Update the review workflow for KiCad 10, share local/CI validation, retain
   the interactive BOM preview, and prevent pull-request Pages deployments.
   Verify the build locally in its pinned container; no remote run/publication.
-- [ ] Complete JLCPCB assembly preparation: resolve J7 sourcing, confirm complete
+- [x] Confirm J7's exact catalog identity: Würth 685119134923 / C2930961; update
+  purchasing fields/BOM without a footprint substitution. All 12 identities match.
+- [ ] Complete JLCPCB assembly preparation: confirm current availability, complete
   XIAO reflow/handling and HDMI shell-tab soldering, choose service/tooling/panel
   needs, and verify the final CPL offsets/rotations and placement preview.
 - [ ] Bring up hardware: check USB, 3.3 V and HDMI 5 V rails, boot/programming,
@@ -324,3 +326,38 @@ unrelated `.history` changes were present at this session's start and were prese
   replacement and its footprint. Final CPL/assembler approval and physical tests
   remain outstanding. The owner can review/commit/push the workflow and verify
   GitHub Pages configuration separately; a green review is not assembly approval.
+
+### 2026-09-13 — exact J7 catalog match and submission checklist
+
+Status: **all 12 fitted part identities matched; final CPL and assembly-process
+approval remain pending.** Baseline `9723b97`; unrelated `.history` changes preserved.
+
+- The user supplied C2930961. Verified JLCPCB and LCSC identify it as the exact
+  Würth 685119134923 already used by J7. Rechecked the manufacturer's land pattern:
+  19 signal lands, 0.50 mm pitch, 0.28 × 2.60 mm pads and 14.50 mm shell-column
+  spacing. Added only the hidden LCSC field in schematic/PCB; no footprint, slot,
+  routing, outline, model or pin-mapping change.
+- Corrected only J7's matching-CSV row on that selection. Cleared the old IC's
+  pricing, stock/MOQ and account quantities; retained the user's quantity five.
+  All other rows remain byte-identical. The original row is recoverable in Git
+  history; export scripts still never overwrite the matching input. New CSV SHA-256:
+  `41d7cd4179fb72cbd5afe507a82e5c78174dc66418836862444c5367fa45a1ee`.
+- Updated the reviewed purchasing contract and removed the J7 export exception.
+  Strict checking accepts all 12 current identities and still rejects the saved
+  old IC snapshot. Added tests for accepting C2930961 and rejecting that code
+  with a different footprint. The clean draft BOM now has seven fully matched
+  groups; `ready_for_order` remains false because placement/process checks are separate.
+- Regenerated the prototype package, source hashes and nominal 3D audit. All
+  solid clearances remain unchanged. Full export and native/pinned-container
+  preview builds pass: 0 ERC/DRC/parity/unrouted findings, 38 matching pin groups,
+  and **20 tests** (10 design, 8 purchasing, 2 preview safety). No check exclusions.
+- Updated README, package notes and the review site to distinguish matched parts
+  from assembly approval. Recorded the normal three-file-set handoff in
+  [JLCPCB submission notes](docs/jlcpcb.md#files-to-submit): fabrication ZIP
+  including drills/outline, clean BOM, and finalized centroid/CPL from one revision.
+- Next action: prepare/review the final JLCPCB CPL (column names plus U3/J7
+  offsets/rotations), inspect the placement preview, and confirm complete-XIAO
+  reflow/handling, four HDMI shell-tab solder joints, service/tooling and stock.
+  `positions-front.csv` is still raw KiCad data, not an approved CPL. Physical
+  bring-up and firmware remain separate pending stages. No order, upload,
+  reservation, commit, push, GitHub deployment or physical test was performed.

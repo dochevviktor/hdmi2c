@@ -1,11 +1,9 @@
 {
-  "status": "BLOCKED \u2014 not an assembly release",
+  "status": "BOM identities matched only",
   "ready_for_order": false,
-  "matching_csv_sha256": "805235e6569a30b30a49cb391ac79200c11d6300927d9ce32ccc3585df5c9b1c",
-  "netlist_sha256": "8e154476fabb31637fada7d8a004cd95d6283c5fede825d5c4a3a1cfa8f4b306",
-  "unresolved_references": [
-    "J7"
-  ],
+  "matching_csv_sha256": "41d7cd4179fb72cbd5afe507a82e5c78174dc66418836862444c5367fa45a1ee",
+  "netlist_sha256": "51b36525678f7d05914a5939aa29d733cba93a08c63a752244e9042b913b2e56",
+  "unresolved_references": [],
   "parts": [
     {
       "reference": "C1",
@@ -36,12 +34,12 @@
     },
     {
       "reference": "J7",
-      "status": "REJECTED",
-      "selected_mpn": "PI3HDMI1310-AZLEX",
-      "selected_code": "C516617",
+      "status": "MATCHED_REVIEWED",
+      "selected_mpn": "685119134923",
+      "selected_code": "C2930961",
       "schematic_mpn": "685119134923",
-      "approved_code": "",
-      "note": "J7 requires Wurth 685119134923. C516617 / PI3HDMI1310-AZLEX is a TQFN HDMI switch IC, not a connector. No replacement code is approved."
+      "approved_code": "C2930961",
+      "note": "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
     },
     {
       "reference": "R24",
@@ -117,7 +115,6 @@
     }
   ],
   "remaining": [
-    "Resolve J7 sourcing without an unreviewed footprint substitution.",
     "Confirm XIAO module reflow/handling and HDMI shell-tab soldering with JLCPCB.",
     "Confirm assembly service, tooling/panel needs and corrected CPL origins/rotations.",
     "Recheck availability, quote and physical validation; no order has been placed."

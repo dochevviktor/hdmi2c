@@ -1,6 +1,6 @@
 "References","Value","Footprint","Quantity","Manufacturer","MPN","LCSC Part #","Specification","Datasheet"
 "C1-C3","100nF","Capacitor_SMD:C_0603_1608Metric","3","YAGEO","CC0603KRX7R9BB104","C14663","100 nF; >=16 V; X7R; +/-10%; 0603",""
-"J7","HDMI1","hdmi2c:WURTH_685119134923_HDMI","1","Wurth Elektronik","685119134923","","HDMI Type A receptacle; SMT contacts and plated-slot shell tabs","https://www.we-online.com/components/products/datasheet/685119134923.pdf"
+"J7","HDMI1","hdmi2c:WURTH_685119134923_HDMI","1","Wurth Elektronik","685119134923","C2930961","HDMI Type A receptacle; SMT contacts and plated-slot shell tabs","https://www.we-online.com/components/products/datasheet/685119134923.pdf"
 "R24,R25","100k","Resistor_SMD:R_0603_1608Metric","2","FOJAN","FRH0603B1003TS","C51048211","100 kohm; >=0.1 W; +/-1%; 0603",""
 "R26,R27","10k","Resistor_SMD:R_0603_1608Metric","2","Sunway","SC0603F1002F2BNRH","C3152123","10 kohm; >=0.1 W; +/-1%; 0603",""
 "SW2,SW3","B3U-1000P","Button_Switch_SMD:SW_SPST_B3U-1000P","2","Omron","B3U-1000P","C231329","Top-actuated SPST-NO; no locating boss","https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf"

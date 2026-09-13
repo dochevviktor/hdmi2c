@@ -40,15 +40,30 @@ support and cable strain relief.
 
 See the [hardware notes and pin mapping](docs/stage2-hardware.md) for design
 decisions, resource provenance, verification, and outstanding physical tests.
-ERC/DRC and schematic/PCB parity are clean; 18 design/BOM/preview regression tests pass.
+ERC/DRC and schematic/PCB parity are clean; 20 design/BOM/preview regression tests pass.
 See the [JLCPCB preparation notes](docs/jlcpcb.md) before ordering: factory-specific
-settings are applied, but J7 sourcing and final assembly placement are unresolved.
+settings are applied and all 12 fitted part identities are matched, but final
+assembly placement and assembler approval remain pending. J7 is the exact Würth
+685119134923 HDMI socket, now matched to JLCPCB **C2930961**.
 Historical rev1 findings are recorded in [stage-1 validation](docs/stage1-validation.md).
 
 The updated [review workflow](docs/automation.md) validates rev2 and generates an
 interactive BOM/schematic preview using KiCad 10. Pull requests cannot deploy to
 Pages. The build was tested locally, including its pinned container; GitHub-hosted
 execution and deployment have not been run here.
+
+## JLCPCB submission files
+
+The standard handoff is a ZIP of the [fabrication folder](hardware/rev2/fabrication/)
+**including Gerbers, outline and drill files**, plus the clean
+[BOM](hardware/rev2/bom-jlcpcb-draft.csv) and a finalized centroid/CPL placement file.
+Use the same reviewed revision for all three. The user-managed `bom.csv` is a
+matching report, not the clean upload BOM.
+
+The current [placement CSV](hardware/rev2/positions-front.csv) still needs JLCPCB
+column formatting and verification of U3/J7 offsets and rotations. Inspect the
+online placement preview and confirm XIAO module handling and soldering the HDMI
+shell tabs before ordering. See the [submission checklist](docs/jlcpcb.md#files-to-submit).
 
 ## Firmware
 

@@ -2,7 +2,7 @@
 
 Updated 2026-09-13. The [workflow](../.github/workflows/main.yml) builds a **CAD
 review preview**, not an approved fabrication/assembly package. A green run does
-not resolve the [JLCPCB sourcing and assembly blockers](jlcpcb.md).
+not resolve the [JLCPCB placement and assembly checks](jlcpcb.md).
 
 ## What runs
 
@@ -12,13 +12,13 @@ Pushes to `main`, pull requests targeting `main`, and manual workflow runs:
    InteractiveHtmlBom **2.12.0**, pinned by commit. The official registry did not
    yet have 10.0.6; local CAD work uses 10.0.6. Both were tested below.
 2. Run `scripts/validate_rev2.sh`: ERC, DRC/parity/unrouted checks, the 38-group
-   electrical contract, footprint/model/keepout/silk checks, and 18 regression
-   tests (10 design, 6 purchasing, 2 preview-output safety tests).
-3. Audit the user's matching CSV without changing it. Only the documented J7
-   exception is permitted for a draft; another unreviewed mismatch fails the job.
+   electrical contract, footprint/model/keepout/silk checks, and 20 regression
+   tests (10 design, 8 purchasing, 2 preview-output safety tests).
+3. Audit the matching CSV without changing it. All 12 fitted part identities
+   must match; the former J7 exception is removed after confirming C2930961.
 4. Generate an interactive BOM, schematic PDF, engineering BOM, clearly named
    JLCPCB draft BOM, and reports into a **new** `out/` directory. J7 retains its
-   correct socket MPN and blank LCSC code. Test pads do not count as fitted parts.
+   correct socket MPN with C2930961. Test pads do not count as fitted parts.
 5. Retain diagnostics even after a failed check. Upload a review preview only
    after a successful build. Upload/deploy Pages **only from `main`, never from a
    pull request**. A manual run on another branch produces a preview only.
@@ -74,14 +74,16 @@ bash scripts/validate_rev2.sh "$validation_dir"
 - Complete headless preview builds passed locally on KiCad 10.0.6 and in the
   **exact pinned 10.0.5 container**, with a read-only project mount and networking
   disabled for the container build. Both returned zero ERC/DRC/parity/unrouted
-  findings, 38 matching pin groups, and 18 passing tests.
+  findings, 38 matching pin groups, and 20 passing tests.
 - Inspected the generated interactive BOM in Firefox: 7 groups / 12 fitted parts,
-  four test pads excluded, correct J7 socket MPN with no purchasing code. All
-  review-index links resolve. Strict purchasing checking still exits 1 for J7.
+  four test pads excluded, correct J7 socket MPN and C2930961 purchasing code.
+  All review-index links resolve. Strict identity checking exits 0; the old
+  incorrect IC snapshot still fails. Assembly approval remains separate.
 - `actionlint` 1.7.12, ShellCheck, shell syntax and whitespace checks pass. These
   local checks do not test GitHub authentication, artifact uploads or deployment.
-- The user BOM's SHA-256 is unchanged:
-  `805235e6569a30b30a49cb391ac79200c11d6300927d9ce32ccc3585df5c9b1c`.
+- The matching CSV's J7 row was explicitly corrected on the user's selection of
+  C2930961; all other rows are unchanged. Export scripts never rewrite it.
+  The current digest is recorded in `hardware/rev2/checks/source-sha256.txt`.
 
 The removed upstream generator [installs KiCad 6](https://github.com/wlcx/kicad-site-generator/blob/main/Dockerfile).
 The replacement uses [KiCad's official container distribution](https://www.kicad.org/download/docker/)

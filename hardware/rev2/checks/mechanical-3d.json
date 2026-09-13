@@ -1,9 +1,9 @@
 {
   "status": "PASS (nominal CAD only)",
   "tool": "cadquery-ocp 8.0.1.0.0",
-  "source_manifest_sha256": "67210faaa6ba0d8e71579d7f258c914f8e10e7c3c8c9c3db393495d36db855e8",
-  "step_sha256": "6576ef7e6a91013f5da9bd497788d16597715056fde35df793b394d101b08461",
-  "pcb_sha256": "2a683b13c36e33c8105a8ae98b69fa4e8f834ac38b51cb2b7dabb3866fe769db",
+  "source_manifest_sha256": "d6c67bf123c902e6b2f2cce0328a0eebc4700a8a302ff27a749ca2a143c57c13",
+  "step_sha256": "f3544f8685d4c5668d0edfb32be750d996f9ce29b0bdda7c70cf5eaf91e51839",
+  "pcb_sha256": "46d4b99fd0386b79586ecaa1a3cc18b7d53d7b540285510e6962e961c3011d6d",
   "xiao_model_sha256": "2e1ce01f4497192485823ca9fffd68e323bafc84cd7b85c2906b5497550be8fc",
   "coordinates": "mm; X=PCB X, Y=-PCB Y, Z=KiCad STEP height; bounds=minXYZ,maxXYZ",
   "modeled_fitted_components": [

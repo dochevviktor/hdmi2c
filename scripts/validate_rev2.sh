@@ -23,8 +23,8 @@ kicad-cli sch export netlist --format kicadxml \
 python3 scripts/check_rev2.py hdmi2c.kicad_pcb "$artifact_dir/checks/netlist.xml"
 python3 -m unittest discover -s tests -v
 
-# The raw matching CSV is read-only input. Only the known J7 sourcing blocker
-# may pass this draft gate; every other unreviewed mismatch fails validation.
+# The matching CSV is read-only input. Every identity/footprint mismatch fails;
+# a matching BOM is still not approval of placement or the assembly process.
 python3 scripts/check_jlcpcb_bom.py hardware/rev2/bom.csv "$artifact_dir/checks/netlist.xml" \
-  --report "$artifact_dir/checks/jlcpcb-bom.json" --allow-unresolved-j7 \
+  --report "$artifact_dir/checks/jlcpcb-bom.json" \
   --draft-bom "$artifact_dir/bom-jlcpcb-draft.csv"

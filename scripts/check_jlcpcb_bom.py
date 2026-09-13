@@ -16,7 +16,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 
-# Reviewed on 2026-09-12; see docs/jlcpcb.md. J7 deliberately has no approved code.
+# Reviewed on 2026-09-12, with J7 confirmed on 2026-09-13; see docs/jlcpcb.md.
 PARTS = {
     **dict.fromkeys(("C1", "C2", "C3"), ("CC0603KRX7R9BB104", "C14663")),
     **dict.fromkeys(("R24", "R25"), ("FRH0603B1003TS", "C51048211")),
@@ -24,7 +24,7 @@ PARTS = {
     **dict.fromkeys(("SW2", "SW3"), ("B3U-1000P", "C231329")),
     "U3": ("113991254", "C27675191"),
     "U4": ("TPD12S016PWR", "C201665"),
-    "J7": ("685119134923", ""),
+    "J7": ("685119134923", "C2930961"),
 }
 
 
@@ -98,10 +98,10 @@ def audit(matches, design):
                 selected["Footprint"] == expected["footprint"])
         status = "MATCHED_REVIEWED" if same and expected["code"] else "NEEDS_REVIEW"
         note = "Part identity reviewed; inventory, placement and assembly acceptance still require confirmation."
-        if ref == "J7":
+        if ref == "J7" and status != "MATCHED_REVIEWED":
             status = "UNRESOLVED" if mpn == expected["mpn"] and not code else "REJECTED"
-            note = ("J7 requires Wurth 685119134923. C516617 / PI3HDMI1310-AZLEX is a "
-                    "TQFN HDMI switch IC, not a connector. No replacement code is approved.")
+            note = ("J7 requires Wurth 685119134923 / C2930961 and the reviewed footprint. "
+                    "C516617 / PI3HDMI1310-AZLEX is a TQFN HDMI switch IC, not a connector.")
         results.append({"reference": ref, "status": status, "selected_mpn": mpn,
                         "selected_code": code, "schematic_mpn": expected["mpn"],
                         "approved_code": expected["code"], "note": note})
@@ -127,8 +127,6 @@ def main():
     parser.add_argument("netlist", type=Path)
     parser.add_argument("--report", required=True, type=Path)
     parser.add_argument("--draft-bom", type=Path)
-    parser.add_argument("--allow-unresolved-j7", action="store_true",
-                        help="Allow only the documented J7 blocker for draft/CAD exports")
     args = parser.parse_args()
     with args.matching_csv.open(newline="", encoding="utf-8-sig") as stream:
         matches = read_matches(stream)
@@ -139,13 +137,12 @@ def main():
               "ready_for_order": False, "matching_csv_sha256": sha256(args.matching_csv),
               "netlist_sha256": sha256(args.netlist), "unresolved_references": pending,
               "parts": results,
-              "remaining": ["Resolve J7 sourcing without an unreviewed footprint substitution.",
-                            "Confirm XIAO module reflow/handling and HDMI shell-tab soldering with JLCPCB.",
+              "remaining": (["Resolve purchasing identity mismatches: " + ", ".join(pending)] if pending else []) +
+                           ["Confirm XIAO module reflow/handling and HDMI shell-tab soldering with JLCPCB.",
                             "Confirm assembly service, tooling/panel needs and corrected CPL origins/rotations.",
                             "Recheck availability, quote and physical validation; no order has been placed."]}
     args.report.write_text(json.dumps(report, indent=2) + "\n")
-    permitted_draft = pending == ["J7"] and args.allow_unresolved_j7
-    if pending and not permitted_draft:
+    if pending:
         print(f"BLOCKED: JLCPCB BOM review required for {', '.join(pending)}", file=sys.stderr)
         return 1
     if args.draft_bom:
@@ -154,7 +151,7 @@ def main():
             writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
             writer.writeheader()
             writer.writerows(rows)
-    print("DRAFT ONLY: 11 component identities matched; J7 sourcing and assembly approval remain unresolved.")
+    print(f"DRAFT ONLY: {len(results)} component identities matched; placement and assembly approval remain unresolved.")
     return 0
 
 

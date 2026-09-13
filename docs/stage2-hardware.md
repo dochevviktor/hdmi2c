@@ -243,7 +243,7 @@ lists them explicitly. No rules were disabled to obtain the rev2 result.
 | Independent electrical-contract / netlist comparison | 38 matching pin groups, including 24 intentional NC groups |
 | XIAO footprint comparison to downloaded Seeed library | All 14 side-pad positions, sizes, and numbers match |
 | PCB outline | 42 × 24 mm; approximately 915.64 mm² material area |
-| Regression tests | 18 pass: 10 design, 6 BOM parser/identity, and 2 preview-output safety checks |
+| Regression tests | 20 pass: 10 design, 8 BOM parser/identity, and 2 preview-output safety checks |
 | XIAO model contract | Pinned STEP hash and identical reviewed transforms in library and PCB |
 | Nominal 3D checks | XIAO/carrier/component clearances, antenna projection, HDMI shell/slot clearance; details above |
 | Visual review | Schematic, front/back assembly and copper, plated-slot drill output, detailed front/back 3D views |

@@ -73,8 +73,24 @@ class JlcpcbBomChecks(unittest.TestCase):
         self.assertEqual(sum(r["Quantity"] for r in rows), 12)
         connector = next(r for r in rows if r["Designator"] == "J7")
         self.assertEqual(connector["Comment"], "685119134923")
-        self.assertEqual(connector["LCSC Part #"], "")
+        self.assertEqual(connector["LCSC Part #"], "C2930961")
         self.assertNotIn("C516617", str(rows))
+
+    def test_correct_wurth_connector_is_accepted(self):
+        matches = self.parse(self.fixture())
+        matches["J7"]["Part #"], matches["J7"]["JLCPCB Part #"] = PARTS["J7"]
+        design = {ref: {"mpn": mpn, "code": code, "footprint": matches[ref]["Footprint"]}
+                  for ref, (mpn, code) in PARTS.items()}
+        self.assertTrue(all(r["status"] == "MATCHED_REVIEWED" for r in audit(matches, design)))
+
+    def test_correct_connector_code_with_wrong_footprint_is_rejected(self):
+        matches = self.parse(self.fixture())
+        matches["J7"]["Part #"], matches["J7"]["JLCPCB Part #"] = PARTS["J7"]
+        design = {ref: {"mpn": mpn, "code": code, "footprint": matches[ref]["Footprint"]}
+                  for ref, (mpn, code) in PARTS.items()}
+        matches["J7"]["Footprint"] = "unreviewed-footprint"
+        connector = next(r for r in audit(matches, design) if r["reference"] == "J7")
+        self.assertEqual(connector["status"], "REJECTED")
 
 
 if __name__ == "__main__":

@@ -4,16 +4,16 @@
 production release.** Read the [hardware notes](../../docs/stage2-hardware.md)
 before fabrication or assembly. No order or external publication was performed.
 JLCPCB preparation is documented in [JLCPCB notes](../../docs/jlcpcb.md).
-**J7's auto-match is incorrect; sourcing and assembly placement remain blocked.**
+**J7 is now matched to C2930961; final placement and assembler approval remain pending.**
 
 - [Schematic PDF](schematic.pdf)
 - [Engineering BOM](bom-design.csv): 12 fitted components, including the XIAO,
   with reviewed specifications and purchasing fields.
-- [Original JLCPCB matching CSV](bom.csv): user-managed and preserved, including
-  its incorrect J7 auto-match; **do not order from this unreviewed mapping**.
+- [JLCPCB matching CSV](bom.csv): user-managed snapshot with J7 explicitly
+  corrected to C2930961. Other rows are preserved; this is not the clean upload BOM.
 - [JLCPCB draft BOM](bom-jlcpcb-draft.csv) and [BOM audit](checks/jlcpcb-bom.json):
-  six matched part groups / 11 components; J7 remains the Würth socket with no
-  approved JLCPCB code. Still a draft, not an assembly release.
+  seven matched part groups / 12 components; J7 is the existing Würth socket,
+  685119134923 / C2930961. Still a draft pending assembly review, not a release.
 - [Front assembly](assembly-front.svg) and [back assembly](assembly-back.svg):
   enlarged 4:1 drawings; the back view is mirrored. All fitted parts are front-side;
   the four back test pads are not fitted components.
@@ -55,14 +55,19 @@ sha256sum -c hardware/rev2/checks/source-sha256.txt
 ```
 
 The export script runs ERC, DRC/parity, the electrical/mechanical/model contract
-check, and 18 regression tests before exporting production-format files. It never
-overwrites `bom.csv`. The purchasing audit permits the known J7 blocker only to
-produce a clearly named draft. If the export
+check, and 20 regression tests before exporting production-format files. It never
+overwrites `bom.csv`. Every purchasing identity/footprint mismatch stops the export;
+all 12 identities now match. If the export
 fails, do not use earlier output files as a release for the newly edited design.
 The updated [review workflow](../../docs/automation.md) shares that validation
 gate and generates a separate 2D preview; it does not publish this whole package.
 Its build was tested locally in the pinned KiCad container. Actual GitHub-hosted
 execution and Pages deployment have not been run here.
+
+For JLCPCB, the normal handoff is a ZIP of `fabrication/` **including drills**,
+the clean BOM, and a finalized centroid/CPL. See the [submission checklist](../../docs/jlcpcb.md#files-to-submit).
+Do not submit `positions-front.csv` unchanged as an approved CPL: custom-part
+offsets/rotations and JLCPCB's placement preview still need review.
 
 ### Repeat the solid-clearance review
 

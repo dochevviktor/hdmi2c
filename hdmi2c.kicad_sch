@@ -1497,6 +1497,7 @@
 (property "Datasheet" "https://www.we-online.com/components/products/datasheet/685119134923.pdf" (at 251.45999999999998 66.04 0) (effects (font (size 1.27 1.27)) hide))
 (property "Manufacturer" "Wurth Elektronik" (at 228.6 66.04 0) (effects (font (size 1.27 1.27)) hide))
 (property "MPN" "685119134923" (at 228.6 66.04 0) (effects (font (size 1.27 1.27)) hide))
+(property "LCSC Part #" "C2930961" (at 228.6 66.04 0) (effects (font (size 1.27 1.27)) hide))
 (property "Specification" "HDMI Type A receptacle; SMT contacts and plated-slot shell tabs" (at 228.6 66.04 0) (effects (font (size 1.27 1.27)) hide))
 (pin "1" (uuid "e10a808d-fa74-5fa6-a3b7-bb3223bcf48d"))
 (pin "2" (uuid "46d4c822-3ce4-5be4-af96-6b4d4639e682"))
