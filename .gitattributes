@@ -1,0 +1,4 @@
+# Mark 3D model files as binary to prevent line ending conversion
+*.step binary
+*.STEP binary
+
