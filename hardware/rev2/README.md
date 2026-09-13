@@ -55,12 +55,14 @@ sha256sum -c hardware/rev2/checks/source-sha256.txt
 ```
 
 The export script runs ERC, DRC/parity, the electrical/mechanical/model contract
-check, and 16 regression tests before exporting production-format files. It never
+check, and 18 regression tests before exporting production-format files. It never
 overwrites `bom.csv`. The purchasing audit permits the known J7 blocker only to
 produce a clearly named draft. If the export
 fails, do not use earlier output files as a release for the newly edited design.
-The existing upstream Pages workflow was not upgraded or tested; these checked-in
-files and the local script are the rev2 handoff.
+The updated [review workflow](../../docs/automation.md) shares that validation
+gate and generates a separate 2D preview; it does not publish this whole package.
+Its build was tested locally in the pinned KiCad container. Actual GitHub-hosted
+execution and Pages deployment have not been run here.
 
 ### Repeat the solid-clearance review
 

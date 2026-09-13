@@ -1,46 +1,87 @@
-name: Interactive BOMs
+name: Rev2 hardware review
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   generate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      # Official KiCad 10.0.5, including matching symbol/footprint libraries.
+      # 10.0.6 is used locally but was not available in the official registry.
+      image: ghcr.io/kicad/kicad:10.0.5@sha256:182c8005cb775a2c448a4c18681d489f1ff472a761885eba3e08b07e3c0564de
+      options: --user root
+    defaults:
+      run:
+        shell: bash
+    env:
+      INTERACTIVE_HTML_BOM_NO_DISPLAY: '1'
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout repo
-      - uses: wlcx/kicad-interactive-html-bom@main
-        name: Run kicad site generator
-      - uses: actions/upload-artifact@v2
-        name: Upload artifacts
+      - name: Checkout project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          name: site
-          path: out/*
-      - uses: actions/upload-pages-artifact@v1
-        name: Upload pages artifact
+          persist-credentials: false
+      - name: Checkout InteractiveHtmlBom
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: openscopeproject/InteractiveHtmlBom
+          ref: 5c192e794cd66fde04bab11810601b711bf8581b # v2.12.0
+          path: .ci-tools/InteractiveHtmlBom
+          persist-credentials: false
+      - name: Initialize KiCad library tables for the container user
+        run: |
+          mkdir -p "$HOME/.config/kicad/10.0"
+          cp /usr/share/kicad/template/sym-lib-table "$HOME/.config/kicad/10.0/"
+          cp /usr/share/kicad/template/fp-lib-table "$HOME/.config/kicad/10.0/"
+      - name: Validate CAD and generate the review preview
+        run: bash scripts/build_review_site.sh .ci-tools/InteractiveHtmlBom out
+      - name: Retain diagnostic reports, including on failure
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rev2-checks
+          path: out/checks/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Upload review preview
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rev2-review-site
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Upload Pages artifact only from main
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: out/
-          
-  # Deploy job
+
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: generate
-
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    # Specify runner + deployment step
-    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

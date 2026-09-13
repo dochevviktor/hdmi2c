@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HDMI2C rev2 — CAD review</title>
+  <style>
+    body { font: 1rem/1.6 system-ui, sans-serif; max-width: 48rem; margin: 3rem auto; padding: 0 1rem; }
+    aside { border-left: .3rem solid #a64b00; padding: .5rem 1rem; background: #fff3df; color: #352400; }
+    a { color: #0055a4; }
+  </style>
+</head>
+<body>
+  <h1>HDMI2C rev2</h1>
+  <p>Single-HDMI, USB-powered XIAO ESP32-C6 monitor controller. This is a generated
+    CAD review preview, not a qualified manufacturing or assembly release.</p>
+  <aside>
+    <p><strong>JLCPCB assembly is blocked.</strong> J7 must be the Würth 685119134923
+      HDMI socket. The supplied C516617 / PI3HDMI1310-AZLEX auto-match is an IC and
+      was rejected. The draft BOM leaves J7's LCSC code blank.</p>
+    <p>Physical fit, USB/power, Wi-Fi and monitor behavior are untested. Final
+      placement offsets/rotations, XIAO reflow handling and HDMI shell-tab soldering
+      still require review. No finalized CPL or fabrication release is provided here.</p>
+  </aside>
+  <h2>Design review</h2>
+  <ul>
+    <li><a href="hdmi2c-iBOM.html">Interactive assembly BOM</a> — 12 fitted parts;
+      the four back-side test pads are excluded from purchasing quantities.</li>
+    <li><a href="schematic.pdf">Schematic PDF</a></li>
+    <li><a href="bom-design.csv">Engineering BOM</a></li>
+    <li><a href="bom-jlcpcb-draft.csv">JLCPCB draft BOM — not ready to order</a></li>
+  </ul>
+  <h2>CAD evidence</h2>
+  <ul>
+    <li><a href="checks/erc.json">ERC report</a></li>
+    <li><a href="checks/drc.json">DRC and schematic/PCB parity report</a></li>
+    <li><a href="checks/jlcpcb-bom.json">Purchasing audit and unresolved items</a></li>
+    <li><a href="checks/source-sha256.txt">Source hashes</a> and
+      <a href="checks/commit.txt">source commit</a> (local edits are identified by hashes)</li>
+    <li>Tool versions: <a href="checks/kicad-version.txt">KiCad</a>,
+      <a href="checks/ibom-version.txt">InteractiveHtmlBom</a></li>
+  </ul>
+  <p>A successful build means the CAD checks passed with the documented J7 draft
+    exception. It is not an assembler approval or a physical hardware test.</p>
+  <p>The user-managed matching CSV, 3D models and their renders are not published
+    in this preview. <a href="InteractiveHtmlBom-LICENSE.txt">InteractiveHtmlBom license</a>.</p>
+</body>
+</html>

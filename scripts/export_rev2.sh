@@ -3,31 +3,16 @@
 set -euo pipefail
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd -- "$project_dir"
-case "$(kicad-cli version)" in
-  10.*) ;;
-  *) echo 'This export script was verified with KiCad 10.0.6.' >&2; exit 2 ;;
-esac
 artifact_dir="$project_dir/hardware/rev2"
 mkdir -p "$artifact_dir/checks" "$artifact_dir/fabrication"
 
 # Fail before producing manufacturing outputs if electrical/CAD checks fail.
-kicad-cli sch erc --exit-code-violations --format json \
-  --output "$artifact_dir/checks/erc.json" hdmi2c.kicad_sch
-kicad-cli pcb drc --schematic-parity --all-track-errors --exit-code-violations \
-  --format json --output "$artifact_dir/checks/drc.json" hdmi2c.kicad_pcb
-kicad-cli sch export netlist --format kicadxml \
-  --output "$artifact_dir/checks/netlist.xml" hdmi2c.kicad_sch
-python3 scripts/check_rev2.py hdmi2c.kicad_pcb "$artifact_dir/checks/netlist.xml"
-python3 -m unittest discover -s tests -v
+bash scripts/validate_rev2.sh "$artifact_dir"
 
 kicad-cli sch export pdf --output "$artifact_dir/schematic.pdf" hdmi2c.kicad_sch
 kicad-cli sch export bom --fields 'Reference,Value,Footprint,QUANTITY,Manufacturer,MPN,LCSC Part #,Specification,Datasheet' \
   --labels 'References,Value,Footprint,Quantity,Manufacturer,MPN,LCSC Part #,Specification,Datasheet' \
   --group-by Value,Footprint,MPN,Specification --output "$artifact_dir/bom-design.csv" hdmi2c.kicad_sch
-# bom.csv is the user's JLCPCB matching export; never overwrite it with CAD output.
-python3 scripts/check_jlcpcb_bom.py "$artifact_dir/bom.csv" "$artifact_dir/checks/netlist.xml" \
-  --report "$artifact_dir/checks/jlcpcb-bom.json" --allow-unresolved-j7 \
-  --draft-bom "$artifact_dir/bom-jlcpcb-draft.csv"
 kicad-cli pcb export pos --side front --format csv --units mm \
   --output "$artifact_dir/positions-front.csv" hdmi2c.kicad_pcb
 

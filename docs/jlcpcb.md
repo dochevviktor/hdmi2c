@@ -1,6 +1,7 @@
 # JLCPCB preparation — rev2
 
-Reviewed 2026-09-12. **CAD checks pass; the assembly order is not ready.**
+Factory/part review 2026-09-12; automation verification 2026-09-13.
+**CAD checks pass; the assembly order is not ready.**
 J7 sourcing, assembler acceptance, and the final placement file remain unresolved.
 No files were uploaded, no parts reserved, and no order placed.
 
@@ -147,6 +148,8 @@ the purchased XIAO. Do not select special carrier edge-plating/castellation
 fabrication solely because the module uses castellated mounting.
 
 Validation: KiCad 10.0.6 ERC/DRC/parity/unrouted **0 findings**, 38 matching pin
-groups, and **16 regression tests pass** (10 design, 6 BOM). Nominal 3D clearances
-are unchanged. This is CAD/purchasing preparation, not JLCPCB DFM/DFA approval or
-a physical test.
+groups, and **18 regression tests pass** (10 design, 6 BOM, 2 preview safety).
+The [review workflow](automation.md) also passes the same checks in its pinned
+KiCad 10.0.5 container. Nominal 3D clearances are unchanged and the separate
+solid report now matches the current STEP/source hashes. This is CAD/purchasing
+preparation, not JLCPCB DFM/DFA approval or a physical test.

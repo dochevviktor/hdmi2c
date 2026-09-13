@@ -81,6 +81,9 @@ verification results. A physical build is a separate validation milestone.
 - [x] Review the supplied JLCPCB template and matching BOM; apply appropriate
   KiCad 10 factory limits, update silk, preserve the raw matching CSV, and save
   reviewed purchasing fields with a guarded draft export.
+- [x] Update the review workflow for KiCad 10, share local/CI validation, retain
+  the interactive BOM preview, and prevent pull-request Pages deployments.
+  Verify the build locally in its pinned container; no remote run/publication.
 - [ ] Complete JLCPCB assembly preparation: resolve J7 sourcing, confirm complete
   XIAO reflow/handling and HDMI shell-tab soldering, choose service/tooling/panel
   needs, and verify the final CPL offsets/rotations and placement preview.
@@ -272,7 +275,8 @@ unrelated `.history` changes were already present and were preserved.
   multiline CSV fields are handled without silently choosing the wrong column.
 - Verification: 0 ERC/DRC/parity/unrouted findings; 38 matching pin groups;
   16 regression tests pass (10 design, 6 BOM). Nominal 3D clearances unchanged;
-  refreshed prototype outputs, source hashes and solid-check report. No rule
+  refreshed prototype outputs and source hashes. The solid-check report was
+  still stale at this handoff and was corrected on 2026-09-13 below. No rule
   severity reductions, DRC exclusions, order, upload, reservation, commit, or push.
 - Next action: resolve whether to source/consign the Würth connector, hand-fit it,
   or investigate a JLCPCB-stocked replacement (requires footprint review before
@@ -282,3 +286,41 @@ unrelated `.history` changes were already present and were preserved.
 - `positions-front.csv` remains raw KiCad data: custom U3/J7 origins need CPL
   offset/rotation verification and a placement-preview review before ordering.
   Physical fit/RF/power/DDC tests and stage-3 firmware remain unperformed.
+
+### 2026-09-13 — JLCPCB verification and review workflow
+
+Status: **CAD/preview checks pass; assembly sourcing and physical acceptance remain
+pending.** Baseline `f5ea02e` contains the preceding JLCPCB preparation. Only the
+unrelated `.history` changes were present at this session's start and were preserved.
+
+- Confirmed all current source hashes and the byte-identical user `bom.csv`.
+  The nominal solid report still referenced the pre-JLCPCB export; reran the
+  pinned OpenCascade audit against the current STEP. All clearances are unchanged
+  and the report now records the current STEP/PCB/manifest hashes. No CAD geometry,
+  component choices or routing changes were made in this session.
+- Replaced the attached workflow's KiCad 6 generator and obsolete Actions with
+  the official KiCad 10.0.5 container and InteractiveHtmlBom 2.12.0. Dependencies
+  are pinned by digest/commit. The official 10.0.6 image was not yet available.
+  Both the local 10.0.6 build and exact 10.0.5 container build pass.
+- Added a shared `validate_rev2.sh` gate used by the full prototype exporter and
+  the new 2D review-site builder. It preserves the user matching CSV and permits
+  only the known J7 exception for a draft. The site excludes the raw CSV, full
+  fabrication package, placements and 3D assets; it labels the J7/assembly blockers.
+- Pull requests produce review artifacts only; only `main` can upload/deploy
+  Pages. Checkout credentials are not persisted, build permissions are read-only,
+  and deploy permissions are isolated. Existing output directories are rejected
+  to avoid overwriting user files or publishing stale assets.
+- Verification: 0 ERC/DRC/parity/unrouted findings, 38 matching pin groups, and
+  **18 passing tests** (10 design, 6 purchasing, 2 preview safety), including in
+  the pinned container with a read-only project mount and no network. Inspected
+  the interactive BOM in Firefox: 7 groups / 12 parts, correct J7 socket MPN with
+  blank LCSC code, four test pads excluded. Index links, actionlint, ShellCheck,
+  shell syntax and whitespace checks pass. Strict BOM checking still exits 1.
+- Reproduction, dependencies and CI limitations are in [automation notes](docs/automation.md).
+  No commit, push, GitHub run, artifact upload, Pages deployment, reservation,
+  fabrication order, physical test or firmware implementation was performed.
+- Next action still requires the J7 sourcing decision: retain the Würth socket
+  for sourcing/consignment/hand-fitting, or authorize investigation of a stocked
+  replacement and its footprint. Final CPL/assembler approval and physical tests
+  remain outstanding. The owner can review/commit/push the workflow and verify
+  GitHub Pages configuration separately; a green review is not assembly approval.

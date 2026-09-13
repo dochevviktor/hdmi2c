@@ -40,10 +40,15 @@ support and cable strain relief.
 
 See the [hardware notes and pin mapping](docs/stage2-hardware.md) for design
 decisions, resource provenance, verification, and outstanding physical tests.
-ERC/DRC and schematic/PCB parity are clean; 16 design/BOM regression tests pass.
+ERC/DRC and schematic/PCB parity are clean; 18 design/BOM/preview regression tests pass.
 See the [JLCPCB preparation notes](docs/jlcpcb.md) before ordering: factory-specific
 settings are applied, but J7 sourcing and final assembly placement are unresolved.
 Historical rev1 findings are recorded in [stage-1 validation](docs/stage1-validation.md).
+
+The updated [review workflow](docs/automation.md) validates rev2 and generates an
+interactive BOM/schematic preview using KiCad 10. Pull requests cannot deploy to
+Pages. The build was tested locally, including its pinned container; GitHub-hosted
+execution and deployment have not been run here.
 
 ## Firmware
 

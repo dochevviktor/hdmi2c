@@ -5,3 +5,5 @@ fp-info-cache
 
 hdmi2c-backups/
 __pycache__/
+/out/
+/.ci-tools/
