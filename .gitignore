@@ -7,3 +7,4 @@ hdmi2c-backups/
 __pycache__/
 /out/
 /.ci-tools/
+/.history/

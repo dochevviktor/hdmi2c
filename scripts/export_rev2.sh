@@ -15,6 +15,11 @@ kicad-cli sch export bom --fields 'Reference,Value,Footprint,QUANTITY,Manufactur
   --group-by Value,Footprint,MPN,Specification --output "$artifact_dir/bom-design.csv" hdmi2c.kicad_sch
 kicad-cli pcb export pos --side front --format csv --units mm \
   --output "$artifact_dir/positions-front.csv" hdmi2c.kicad_pcb
+# Separate upload schema from the raw KiCad export and the purchasing BOM.
+# This maps columns/units only; custom-part offsets and all rotations need review.
+python3 scripts/export_jlcpcb_cpl.py "$artifact_dir/positions-front.csv" \
+  "$artifact_dir/bom-jlcpcb-draft.csv" --output "$artifact_dir/cpl-jlcpcb-draft.csv" \
+  --report "$artifact_dir/checks/jlcpcb-cpl.json"
 
 # Fabrication drawings retain a full sheet so connector overhang is visible.
 kicad-cli pcb export svg --layers F.Fab,F.SilkS,Edge.Cuts --sketch-pads-on-fab-layers \

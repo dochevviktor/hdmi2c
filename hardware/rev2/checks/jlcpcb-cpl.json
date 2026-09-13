@@ -1,0 +1,40 @@
+{
+  "status": "FORMAT_ONLY_REVIEW_REQUIRED",
+  "ready_for_order": false,
+  "columns": [
+    "Designator",
+    "Mid X",
+    "Mid Y",
+    "Layer",
+    "Rotation"
+  ],
+  "units": "mm",
+  "component_count": 12,
+  "bom_reference_match": true,
+  "coordinate_transform": "None; source XY retained, including signs. Input must be millimetres.",
+  "rotation_transform": "Normalized to [0, 360) degrees; no component-specific corrections.",
+  "known_non_centroid_origins": [
+    "J7",
+    "U3"
+  ],
+  "placement_review_required": [
+    "C1",
+    "C2",
+    "C3",
+    "J7",
+    "R24",
+    "R25",
+    "R26",
+    "R27",
+    "SW2",
+    "SW3",
+    "U3",
+    "U4"
+  ],
+  "note": "Review offsets, pin 1, USB/HDMI direction and all rotations in JLCPCB's placement preview. Correct column formatting does not establish correct machine placement or assembly approval.",
+  "input_sha256": {
+    "hardware/rev2/positions-front.csv": "2f2ca53e233c5c08beb8f9a5914d841310241a72b90f822ff9af15aeeddd1590",
+    "hardware/rev2/bom-jlcpcb-draft.csv": "25ba4518d76385e2161e7ac45b91dbb866759ebaa1b7b5eaa5313f43368aae55"
+  },
+  "cpl_sha256": "4d0d4dd33bf42788016cab2c601f1fb209bcf27247943ac6e7250424997f73b3"
+}

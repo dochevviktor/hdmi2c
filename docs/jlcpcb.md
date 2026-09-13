@@ -112,13 +112,26 @@ remain byte-identical. Export/validation scripts still never rewrite this input.
 - [BOM audit](../hardware/rev2/checks/jlcpcb-bom.json): records source hashes and
   all 12 reviewed identities. `unresolved_references` is empty, but
   `ready_for_order` remains false until the separate assembly checks are complete.
+- [cpl-jlcpcb-draft.csv](../hardware/rev2/cpl-jlcpcb-draft.csv): generated from
+  `positions-front.csv` and checked against the draft BOM's 12 designators. Its
+  header, column order and `mm` values follow JLCPCB's sample CPL; XY and rotations
+  are copied unchanged. The [CPL report](../hardware/rev2/checks/jlcpcb-cpl.json)
+  records input hashes and keeps `ready_for_order` false.
 
-The column format follows JLCPCB's [KiCad export guide](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad).
-The existing `positions-front.csv` is still **raw KiCad placement data**, not an
-approved JLCPCB CPL. U3 and J7 have non-centroid footprint origins. Before an order,
-prepare and verify the CPL's offsets/rotations against JLCPCB's library/placement
-preview, including pin 1, USB direction, and HDMI direction. Do not just relabel
-the raw coordinate columns and assume the two custom parts will be placed correctly.
+The column format follows JLCPCB's [KiCad export guide](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad)
+and [placement-file guide](https://jlcpcb.com/help/article/pick-place-file-for-pcb-assembly).
+`positions-front.csv` remains **raw KiCad placement data**, and the draft CPL is only
+a column/unit conversion, not an approved JLCPCB CPL. JLCPCB defines Mid X/Mid Y as
+the component centroid, but the U3 and J7 footprint origins are not centroids:
+
+| Ref | Draft CPL XY, mm | Pad-area centre, mm | Difference, mm |
+| --- | --- | --- | --- |
+| U3 | 52.000, -71.037 | 60.917, -60.537 | +8.917, +10.500 |
+| J7 | 82.500, -62.000 | 85.950, -62.000 | +3.450, 0 (courtyard centre +4.375, 0) |
+
+The other ten footprint origins coincide with their pad and courtyard centres.
+Before an order, correct U3/J7 against JLCPCB's part models and verify every
+rotation in the placement preview, including pin 1, USB direction, and HDMI direction.
 
 ```sh
 bash scripts/export_rev2.sh
@@ -142,7 +155,7 @@ Keep all three synchronized to the same reviewed design revision.
 | --- | --- |
 | Fabrication ZIP | ZIP the contents of `hardware/rev2/fabrication/`: copper, solder mask, silkscreen, paste, outline **and `.drl` drill files**. Keep the antenna cutout and HDMI plated-slot routing; drill-map PDFs and `.gbrjob` are supplementary. |
 | BOM | Use the clean `hardware/rev2/bom-jlcpcb-draft.csv` for matching/review, not the duplicate-header `bom.csv` matching report. It now includes C2930961 and all 12 fitted parts; finalize the order only after assembly signoff. |
-| Centroid / CPL / pick-and-place | Finalize from `hardware/rev2/positions-front.csv`, with `Designator,Mid X,Mid Y,Rotation,Layer`, mm units, and verified origin/rotation corrections. The current raw export is **not the finalized upload CPL**. |
+| Centroid / CPL / pick-and-place | Finalize from `hardware/rev2/cpl-jlcpcb-draft.csv` (`Designator,Mid X,Mid Y,Layer,Rotation`, mm), generated from `positions-front.csv`. Apply the U3/J7 centroid corrections and verify all rotations first; the draft is **not the finalized upload CPL**. |
 
 This follows JLCPCB's [Gerber/drill guide](https://jlcpcb.com/help/article/how-to-generate-gerber-and-drill-files-in-kicad-9)
 and [BOM/CPL guide](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad).
@@ -175,7 +188,9 @@ also distinguish tooling/fiducial requirements by service.
   stencil, handling of the notched outline/overhanging connectors, and any panel,
   rails, fiducials, or tooling holes. Do not enlarge the carrier just to match the
   Standard minimum without choosing that process first.
-- [ ] Finalize and inspect the CPL and JLCPCB placement preview before paying.
+- [x] Convert placements to JLCPCB's CPL columns: `cpl-jlcpcb-draft.csv`.
+- [ ] Correct U3/J7 centroids, verify all rotations, and inspect JLCPCB's placement
+  preview before paying.
 - [ ] Perform the existing physical fit, power, USB, RF, and monitor checks.
 
 The carrier itself has no castellated edge holes: the castellations belong to

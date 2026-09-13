@@ -30,6 +30,10 @@ JLCPCB preparation is documented in [JLCPCB notes](../../docs/jlcpcb.md).
   must check its machine origin and rotation. This is not a finalized JLCPCB CPL;
   U3 and J7 require offset/rotation review. J7 is mixed SMT/plated-slot assembly
   and is included in this file, not omitted as a non-SMD part.
+- [JLCPCB draft CPL](cpl-jlcpcb-draft.csv) and [CPL report](checks/jlcpcb-cpl.json):
+  those 12 placements in JLCPCB's `Designator,Mid X,Mid Y,Layer,Rotation` format.
+  XY and rotations are unchanged, so U3/J7 still need centroid corrections and all
+  rotations need placement-preview review.
 - [Fabrication files](fabrication/): two copper layers, both solder masks and
   silkscreens, paste, outline, plated/non-plated Excellon drills, and drill maps.
   There are 33 plated 0.3 mm vias and four plated 0.9 mm-wide routed HDMI shell
@@ -66,8 +70,8 @@ execution and Pages deployment have not been run here.
 
 For JLCPCB, the normal handoff is a ZIP of `fabrication/` **including drills**,
 the clean BOM, and a finalized centroid/CPL. See the [submission checklist](../../docs/jlcpcb.md#files-to-submit).
-Do not submit `positions-front.csv` unchanged as an approved CPL: custom-part
-offsets/rotations and JLCPCB's placement preview still need review.
+Do not submit `positions-front.csv` or the unmodified draft CPL as an approved CPL:
+custom-part offsets/rotations and JLCPCB's placement preview still need review.
 
 ### Repeat the solid-clearance review
 

@@ -60,10 +60,12 @@ The standard handoff is a ZIP of the [fabrication folder](hardware/rev2/fabricat
 Use the same reviewed revision for all three. The user-managed `bom.csv` is a
 matching report, not the clean upload BOM.
 
-The current [placement CSV](hardware/rev2/positions-front.csv) still needs JLCPCB
-column formatting and verification of U3/J7 offsets and rotations. Inspect the
-online placement preview and confirm XIAO module handling and soldering the HDMI
-shell tabs before ordering. See the [submission checklist](docs/jlcpcb.md#files-to-submit).
+The [draft CPL](hardware/rev2/cpl-jlcpcb-draft.csv) puts the raw
+[placement CSV](hardware/rev2/positions-front.csv) into JLCPCB's column format, but
+U3/J7 still use footprint origins rather than centroids and all rotations are
+unverified. Correct those in the online placement preview and confirm XIAO module
+handling and soldering the HDMI shell tabs before ordering. See the
+[submission checklist](docs/jlcpcb.md#files-to-submit).
 
 ## Firmware
 

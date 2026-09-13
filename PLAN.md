@@ -361,3 +361,24 @@ approval remain pending.** Baseline `9723b97`; unrelated `.history` changes pres
   `positions-front.csv` is still raw KiCad data, not an approved CPL. Physical
   bring-up and firmware remain separate pending stages. No order, upload,
   reservation, commit, push, GitHub deployment or physical test was performed.
+
+### 2026-09-13 — JLCPCB draft CPL
+
+Status: **JLCPCB-format draft CPL generated; U3/J7 centroid corrections, rotation
+review and assembler approval remain pending.** Baseline `8b7c0f0` plus the user's
+uncommitted CPL exporter, its tests and `export_rev2.sh` hook; `.history` preserved.
+
+- Reviewed `scripts/export_jlcpcb_cpl.py` and `tests/test_jlcpcb_cpl.py` without
+  changing them. The header, column order and `mm` values match JLCPCB's sample
+  CPL; `Top`/`Bottom` is an accepted layer form and rotations stay counter-clockwise.
+- Generated `hardware/rev2/cpl-jlcpcb-draft.csv` and `checks/jlcpcb-cpl.json` from
+  the placement file and draft BOM, which match fresh KiCad 10.0.6 regenerations.
+  All 12 designators match the BOM; XY and rotations are copied unchanged.
+- JLCPCB defines Mid X/Mid Y as centroids. pcbnew shows only U3 and J7 differ from
+  their pad centres (+8.917/+10.500 mm and +3.450/0 mm), so the unmodified draft
+  would misplace them. Details are in the [JLCPCB notes](docs/jlcpcb.md).
+- Verification: `validate_rev2.sh` passes locally, including ERC/DRC and 30 tests
+  (10 design, 8 purchasing, 10 CPL, 2 preview safety). The pinned container build
+  was not rerun.
+- Next action: correct U3/J7 and check every rotation in JLCPCB's placement preview,
+  then continue the assembly checklist. No order, upload, commit or push was made.
